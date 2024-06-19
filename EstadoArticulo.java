@@ -1,7 +1,7 @@
 public enum EstadoArticulo{
-  Sometido,
-  EnRevision,
-  Aceptado,
-  Rechezado,
-  Publicado
+  SOMETIDO,
+  ENREVISION,
+  ACEPTADO,
+  RECHAZADO,
+  PUBLICADO
 }
