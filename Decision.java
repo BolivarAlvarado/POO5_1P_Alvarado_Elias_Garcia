@@ -1,3 +1,4 @@
 public enum Decision{
-  ACEPTADO, RECHAZADO
+  ACEPTADO, 
+  RECHAZADO
 }
