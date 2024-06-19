@@ -14,7 +14,7 @@ public class Articulo{
     return "Codigo";
 }
 
-  public Articulo(String titulo, String contenido, ArrayList<String> palaCla,Autor autor, EstadoArticulo estado){
+  public Articulo(String titulo, String contenido, ArrayList<String> palaCla,Autor autor, EstadoArticulo estado, String resumen){
     this.titulo = titulo;
     this.contenido = contenido;
     this.resumen = resumen;
