@@ -1,3 +1,3 @@
-public enum rolUsuario {
+public enum RolUsuario {
     AUTOR,REVISOR,EDITOR
 }
