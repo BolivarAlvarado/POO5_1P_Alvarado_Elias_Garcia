@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+
 public class Articulo{
+
   private String titulo;
   private String contenido;
   private String resumen;
@@ -6,48 +9,57 @@ public class Articulo{
   private ArrayList<String> palaCla;
   private Autor autor;
   private EstadoArticulo estado;
+
+  private String generarCodigoArticulo(){
+    return "Codigo";
+}
+
   public Articulo(String titulo, String contenido, String resumen, String codigoArti, ArrayList<String> palaCla,Autor autor, EstadoArticulo estado){
-    this.titulo=titulo;
-    this.contenido=contenido;
-    this.resumen=resumen;
-    this.codigoArti=codigoArti;
-    this.palaCla=palaCla;
-    this.autor=autor;
+    this.titulo = titulo;
+    this.contenido = contenido;
+    this.resumen = resumen;
+    this.codigoArti = generarCodigoArticulo();
+    this.palaCla = palaCla;
+    this.autor = autor;
   }
+
   public String getTitulo(){
-    retun titulo;
+    return titulo;
   }
   public void setTitulo(String titulo){
     this.titulo=titulo;
   }
   public String getContenido(){
-    retun titulo;
+    return contenido;
   }
   public void setContenido(String contenido){
     this.contenido=contenido;
   }
   public String getResumen(){
-    retun resumen;
+    return resumen;
   }
   public void setResumen(String resumen){
     this.resumen=resumen;
   }
   public String getCodigoArti(){
-    retun titulo;
+    return codigoArti;
   }
-  public void setCodigoArti(String codigoArti){
-    this.codigoArti=codigoArti;
+  public ArrayList<String> getPalaCla(){
+    return palaCla;
   }
-  public String getPalaCla(){
-    retun palaCla;
-  }
-  public void setPalaCla(String palaCla){
+  public void setPalaCla(ArrayList<String> palaCla){
     this.palaCla=palaCla;
   }
-  public String getAutor(){
-    retun autor;
+  public Autor getAutor(){
+    return autor;
   }
-  public void setAutor(String autor){
+  public void setAutor(Autor autor){
     this.autor=autor;
+  }
+  public EstadoArticulo getEstado(){
+    return estado;
+  }
+  public void setEstado(EstadoArticulo estado){
+    this.estado = estado;
   }
 }

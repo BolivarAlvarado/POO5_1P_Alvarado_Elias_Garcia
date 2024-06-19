@@ -4,10 +4,10 @@ public class Revision{
   private String codigoRe;
   private Articulo articulo;
   private Revisor revisor;
-  private ArrayList<String> comentrarios;
+  private ArrayList<String> comentarios;
   private Decision decision;
 
-  public Revision(String codigoRE, Articulo articulo, Revisor revisor, ArrayList<String>comentarios, Desicion decision){
+  public Revision(String codigoRe, Articulo articulo, Revisor revisor, ArrayList<String>comentarios, Decision decision){
     this.codigoRe=codigoRe;
     this.articulo=articulo;
     this.revisor=revisor;
@@ -17,13 +17,13 @@ public class Revision{
   public String getCodigoRe(){
     return codigoRe;
   }
-  public void setCodigoRe(String codigoRe)(){
+  public void setCodigoRe(String codigoRe){
     this.codigoRe=codigoRe;
   }
   public Articulo getArticulo(){
     return articulo;
   }
-  public void serArticulo(Articulo articulo){
+  public void setArticulo(Articulo articulo){
     this.articulo=articulo;
   }
   public Revisor getRevisor(){
@@ -35,14 +35,14 @@ public class Revision{
   public ArrayList<String> getComentarios(){
     return comentarios;
   }
-  public void setComentarios(ArrayList<String> comentarios){
-    this.comentarios=comentarios;
+  public void agregarComentario(String comentario){
+    comentarios.add(comentario);
   }
-  public Desicion getDesicion(){
-    return revision;
+  public Decision getDecision(){
+    return decision;
   }
-  public void setDesicion(Desicion desicion){
-    this.desicion=desicion;
+  public void setDecision(Decision decision){
+    this.decision=decision;
   }
 }
   

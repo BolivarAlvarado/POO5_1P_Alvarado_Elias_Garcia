@@ -1,4 +1,3 @@
-public enum Desicion{
-  Aceptado,
-  Rechazado
+public enum Decision{
+  ACEPTADO, RECHAZADO
 }
