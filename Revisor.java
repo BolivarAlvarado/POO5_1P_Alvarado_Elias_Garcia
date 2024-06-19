@@ -2,8 +2,8 @@ public class Revisor extends Usuario{
   private String especialidad;
   private int numArtRe;
 
-  public Revisor(String user, String password,String nombre,String apellido, String CorreoElectronico,String especialidad,int numArtRe){
-    super(user,password,nombre,apellido,CorreoElectronico,RolUsuario.REVISOR);
+  public Revisor(String user, String password,String nombre,String apellido, String correoElectronico,String especialidad,int numArtRe){
+    super(user,password,nombre,apellido,correoElectronico,RolUsuario.REVISOR);
     this.especialidad=especialidad;
     this.numArtRe = numArtRe;
   }

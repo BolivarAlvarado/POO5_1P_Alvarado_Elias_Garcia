@@ -6,8 +6,8 @@ public class Autor extends Usuario{
     private String generarCodigoAutor(){
         return "Codigo";
     }
-    public Autor(String user, String password, String nombre, String apellido, String CorreoElectronico,String codigoAutor, String institucion, String campoInvestigacion){
-        super(user,password,nombre,apellido,CorreoElectronico,RolUsuario.AUTOR);
+    public Autor(String user, String password, String nombre, String apellido, String correoElectronico,String codigoAutor, String institucion, String campoInvestigacion){
+        super(user,password,nombre,apellido,correoElectronico,RolUsuario.AUTOR);
         this.institucion = institucion;
         this.campoInvestigacion = campoInvestigacion;
         this.codigoAutor = generarCodigoAutor();

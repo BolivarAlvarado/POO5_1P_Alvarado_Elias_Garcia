@@ -4,8 +4,8 @@ public class Editor extends Usuario{
    private EstadoArticulo estadoArticulo;
    
 
-  public Editor(String user, String password, String nombre, String apellido, String CorreoElectronico,String codigoArticulo, EstadoArticulo estadoArticulo){
-    super(user,password,nombre,apellido,CorreoElectronico,RolUsuario.EDITOR);
+  public Editor(String user, String password, String nombre, String apellido, String correoElectronico,String codigoArticulo, EstadoArticulo estadoArticulo){
+    super(user,password,nombre,apellido,correoElectronico,RolUsuario.EDITOR);
     this.codigoArticulo = codigoArticulo;
     this.estadoArticulo = estadoArticulo;
    }

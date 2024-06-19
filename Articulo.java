@@ -6,7 +6,7 @@ public class Articulo{
   private String contenido;
   private String resumen;
   private String codigoArti;
-  private ArrayList<String> palaCla;
+  private ArrayList<String> palabrasClaves;
   private Autor autor;
   private EstadoArticulo estado;
 
@@ -14,12 +14,12 @@ public class Articulo{
     return "Codigo";
 }
 
-  public Articulo(String titulo, String contenido, ArrayList<String> palaCla,Autor autor, EstadoArticulo estado, String resumen){
+  public Articulo(String titulo, String contenido, ArrayList<String> palabrasClaves,Autor autor, EstadoArticulo estado, String resumen){
     this.titulo = titulo;
     this.contenido = contenido;
     this.resumen = resumen;
     this.codigoArti = generarCodigoArticulo();
-    this.palaCla = palaCla;
+    this.palabrasClaves = palabrasClaves;
     this.autor = autor;
     this.estado = estado;
   }
@@ -46,10 +46,10 @@ public class Articulo{
     return codigoArti;
   }
   public ArrayList<String> getPalaCla(){
-    return palaCla;
+    return palabrasClaves;
   }
-  public void setPalaCla(ArrayList<String> palaCla){
-    this.palaCla=palaCla;
+  public void setPalaCla(ArrayList<String> palabrasClaves){
+    this.palabrasClaves=palabrasClaves;
   }
   public Autor getAutor(){
     return autor;
