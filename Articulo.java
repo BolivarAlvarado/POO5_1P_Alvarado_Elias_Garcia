@@ -14,13 +14,14 @@ public class Articulo{
     return "Codigo";
 }
 
-  public Articulo(String titulo, String contenido, String resumen, String codigoArti, ArrayList<String> palaCla,Autor autor, EstadoArticulo estado){
+  public Articulo(String titulo, String contenido, ArrayList<String> palaCla,Autor autor, EstadoArticulo estado){
     this.titulo = titulo;
     this.contenido = contenido;
     this.resumen = resumen;
     this.codigoArti = generarCodigoArticulo();
     this.palaCla = palaCla;
     this.autor = autor;
+    this.estado = estado;
   }
 
   public String getTitulo(){
