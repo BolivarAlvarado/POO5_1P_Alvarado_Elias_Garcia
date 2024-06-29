@@ -7,7 +7,7 @@ public class Autor extends Usuario{
     private String institucion;
     private String campoInvestigacion;
     private ArrayList<Articulo> articulos;
-private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
   private String generarCodigoAutor(){
     Random rd = new Random();
