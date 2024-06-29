@@ -13,6 +13,7 @@ public class Revision{
     this.revisor=revisor;
     this.comentarios=comentarios;
     this.decision=decision;
+    Editorial.revisiones.add(this);
   }
   public String getCodigoRe(){
     return codigoRe;

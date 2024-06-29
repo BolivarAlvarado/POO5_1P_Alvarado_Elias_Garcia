@@ -8,6 +8,7 @@ public class Editor extends Usuario{
     super(user,password,nombre,apellido,correoElectronico,RolUsuario.EDITOR);
     this.codigoArticulo = codigoArticulo;
     this.estadoArticulo = estadoArticulo;
+    Editorial.editores.add(this);
    }
   public String getNombreJournal(){
     return nombreJournal;
@@ -17,9 +18,6 @@ public class Editor extends Usuario{
   }
   public String getCodigoArticulo(){
     return codigoArticulo;
-  }
-  public void setCodigoArticulo(String codigoArticulo){
-    this.codigoArticulo=codigoArticulo;
   }
   public EstadoArticulo getEstadoArticulo(){
     return estadoArticulo;
