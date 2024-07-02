@@ -6,7 +6,7 @@ public class Revisor extends Usuario{
     super(user,password,nombre,apellido,correoElectronico,RolUsuario.REVISOR);
     this.especialidad=especialidad;
     this.numArtRe = numArtRe;
-    Editorial.usuarios.add(this);
+    Editorial.revisores.add(this);
   }
 
   @Override

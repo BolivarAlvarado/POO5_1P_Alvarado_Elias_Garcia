@@ -10,17 +10,20 @@ import java.nio.charset.StandardCharsets;
 
 public class Editorial {
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
+    public static ArrayList<Revisor> revisores = new ArrayList<>();
     public static ArrayList<Autor> autores = new ArrayList<>();
+    public static ArrayList<Editor> editores = new ArrayList<>();
     public static ArrayList<Articulo> articulos = new ArrayList<>();
     public static ArrayList<Revision> revisiones = new ArrayList<>();
     public static void main(String[] args) {
         //Al ejecutar la aplicación, se mostrarán las opciones de Someter Artículo e Iniciar Sesión
         //S = someter articulo , I = iniciar sesion
         Scanner sc = new Scanner(System.in);
-        System.out.println("Opciones 'S' O 'I': ");
+        System.out.println("Opciones 'S' O 'I': "); //Someter articulo 'S', Iniciar Sesion 'I'
         String opc = sc.nextLine();
         if(opc.equalsIgnoreCase("S")){
-            someterArticulo(sc); 
+            someterArticulo(sc);
+            //asignar automaticamente a dos revisores  de la lista de revisores
         }else{
             iniciarSesion(sc);
         }
@@ -62,6 +65,21 @@ public class Editorial {
         }
     }
 
+
+//Gestion de revision
+//Asignar automaticamente a dos revisores de la lista de revisores
+//Enviar un correo a los revisores indicando que se les ha asignado un articulo(en el contenido del mail incluir a los datos del articulo)
+
+public void asignarRevisores(Articulo articulo, ArrayList<Revisor> revisores){}
+
+public void notificarAutor(Articulo articulo, EstadoArticulo decision){}
+
+public void proporcionarComentarios(){}
+
+
+
+
+
 // metodo para escribir en los archivos
         public static void escribirArchivo(String nombreArchivo, Object objeto) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
@@ -85,12 +103,5 @@ public class Editorial {
     //     }
     //     return lineas;
     // }
-    
-
-
-    public void asignarRevisores(Articulo articulo, ArrayList<Revisor> revisor){
-    }
-
-    public void notificarAutor(Articulo articulo, EstadoArticulo decision){}
-    
+        
 }
