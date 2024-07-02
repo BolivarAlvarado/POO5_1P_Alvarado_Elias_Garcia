@@ -51,7 +51,7 @@ public class Editorial {
 // Gestion de someter articulo
     public static void someterArticulo(Scanner sc){
         Autor autor = Autor.ingresarDatosAutor(sc); 
-        escribirArchivo("autores.txt", autor.toString()); // guarda los datos ingresados en su rescpectivo archivo
+        escribirArchivo("autores.txt", autor.toString()); // guarda los datos ingresados en su respectivo archivo
         Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
         autor.setArticulo(articulo); // VER COMO  AGREGAR  EL ARTICULO EN EL ARCHIVO 
         escribirArchivo("articulos.txt", articulo.toString());// guarda los datos ingresados en su rescpectivo archivo
