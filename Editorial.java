@@ -53,7 +53,7 @@ public class Editorial {
         Autor autor = Autor.ingresarDatosAutor(sc); 
         escribirArchivo("autores.txt", autor.toString()); // guarda los datos ingresados en su rescpectivo archivo
         Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
-        autor.setArticulo(articulo); 
+        autor.setArticulo(articulo); // VER COMO  AGREGAR  EL ARTICULO EN EL ARCHIVO 
         escribirArchivo("articulos.txt", articulo.toString());// guarda los datos ingresados en su rescpectivo archivo
         System.out.println("Desea enviar el artículo a revisión 'S' , 'N': "); //SI : 'S' , NO : 'N'
         String opc2 = sc.nextLine();

@@ -55,8 +55,8 @@ public class Articulo{
   }
   @Override
   public String toString(){
-    return "Autor: " + autor.getNombre() + "Título: " + titulo + "Contenido: " + contenido +  
-    "Palabras Claves: " + palabrasClaves.toString() + "Estado artīculo: " + estado + "Resumen: " 
+    return "Autor: " + autor.getNombre() + ", Título: " + titulo + ", Contenido: " + contenido +  
+    ", Palabras Claves: " + palabrasClaves.toString() + ", Estado artículo: " + estado + ", Resumen: " 
     + resumen;
   }
 
