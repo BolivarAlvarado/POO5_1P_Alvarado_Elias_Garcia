@@ -6,8 +6,20 @@ public class Revisor extends Usuario{
     super(user,password,nombre,apellido,correoElectronico,RolUsuario.REVISOR);
     this.especialidad=especialidad;
     this.numArtRe = numArtRe;
-    Editorial.revisores.add(this);
+    Editorial.usuarios.add(this);
   }
+
+  @Override
+  public void generarCorreoElectronico(){} 
+
+
+
+  @Override
+  public void decidirSobreArticulo(){}
+
+
+
+
   public String getEspecialidad(){
     return especialidad;
   }

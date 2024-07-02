@@ -53,6 +53,12 @@ public class Articulo{
 
     return new Articulo(autor,titulo,contenido,palabrasClaves,EstadoArticulo.INGRESADO,resumen);
   }
+  @Override
+  public String toString(){
+    return "Autor: " + autor.getNombre() + "Título: " + titulo + "Contenido: " + contenido +  
+    "Palabras Claves: " + palabrasClaves.toString() + "Estado artīculo: " + estado + "Resumen: " 
+    + resumen;
+  }
 
 
   public void enviarArticuloARevision(){} //

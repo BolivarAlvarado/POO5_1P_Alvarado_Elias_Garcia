@@ -8,8 +8,19 @@ public class Editor extends Usuario{
     super(user,password,nombre,apellido,correoElectronico,RolUsuario.EDITOR);
     this.codigoArticulo = codigoArticulo;
     this.estadoArticulo = estadoArticulo;
-    Editorial.editores.add(this);
+    Editorial.usuarios.add(this);
    }
+   @Override
+   public void generarCorreoElectronico(){}
+
+
+
+   @Override
+   public void decidirSobreArticulo(){}
+
+
+
+
   public String getNombreJournal(){
     return nombreJournal;
   }

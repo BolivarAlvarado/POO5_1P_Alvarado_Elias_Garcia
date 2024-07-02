@@ -2,7 +2,10 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Autor extends Usuario{
+public class Autor{
+    private String nombre;
+    private String apellido;
+    private String correoElectronico;
     private String codigoAutor;
     private String institucion;
     private String campoInvestigacion;
@@ -19,7 +22,9 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     return codigo.toString();
 }
     public Autor(String nombre, String apellido, String correoElectronico, String institucion, String campoInvestigacion){
-        super(nombre,apellido,correoElectronico,RolUsuario.AUTOR);
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correoElectronico = correoElectronico;
         this.institucion = institucion;
         this.campoInvestigacion = campoInvestigacion;
         this.codigoAutor = generarCodigoAutor();
@@ -39,11 +44,20 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         String institucion = sc.nextLine();
         System.out.println("Ingrese su campo de investigación: ");
         String campoInvestigacion = sc.nextLine();
-        sc.close();
         return new Autor(nombre, apellido, correoElectronico, institucion, campoInvestigacion);
+    }
+    @Override
+    public String toString(){
+        return "Nombre: " + nombre + "Apellido: " + apellido + "Correo Electrónico: " + correoElectronico + 
+        "Institucion: "+ institucion + "Campo de investigación: " + campoInvestigacion + "Artīculos: " + 
+        articulos.toString();
     }
 
 
+
+    public String getNombre(){
+        return nombre;
+    }
 
     public void setArticulo(Articulo articulo){
         articulos.add(articulo);

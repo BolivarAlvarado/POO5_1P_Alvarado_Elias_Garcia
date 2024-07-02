@@ -15,6 +15,14 @@ public class Revision{
     this.decision=decision;
     Editorial.revisiones.add(this);
   }
+
+
+
+
+
+
+
+  
   public String getCodigoRe(){
     return codigoRe;
   }
