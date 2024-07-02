@@ -17,7 +17,6 @@ public class Editorial {
     public static ArrayList<Revision> revisiones = new ArrayList<>();
     public static void main(String[] args) {
         //Al ejecutar la aplicación, se mostrarán las opciones de Someter Artículo e Iniciar Sesión
-        //S = someter articulo , I = iniciar sesion
         Scanner sc = new Scanner(System.in);
         System.out.println("Opciones 'S' O 'I': "); //Someter articulo 'S', Iniciar Sesion 'I'
         String opc = sc.nextLine();
