@@ -48,7 +48,8 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     }
     @Override
     public String toString(){
-        return "Nombre: " + nombre + ", Apellido: " + apellido + ", Código: " + codigoAutor +", Correo Electrónico: " + correoElectronico + 
+        return "-----------------------------\n"+
+        "Nombre: " + nombre + ", Apellido: " + apellido + ", Código: " + codigoAutor +", Correo Electrónico: " + correoElectronico + 
         ", Institución: "+ institucion + ", Campo de investigación: " + campoInvestigacion + ", Artículos: " + 
         articulos.toString();
     }
