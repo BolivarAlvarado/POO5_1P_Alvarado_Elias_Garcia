@@ -55,13 +55,17 @@ public class Articulo{
   }
   @Override
   public String toString(){
-    return "Autor: " + autor.getNombre() + ", Título: " + titulo + "Código: "+ codigoArti + ", Contenido: " + contenido +  
+    return "------------------------------\n"
+    +"Autor: " + autor.getNombre() + ", Título: " + titulo + "Código: "+ codigoArti + ", Contenido: " + contenido +  
     ", Palabras Claves: " + palabrasClaves.toString() + ", Estado artículo: " + estado + ", Resumen: " 
     + resumen;
   }
 
 
-  public void enviarArticuloARevision(){} //
+  public void enviarArticuloARevision(){
+    //Asignar a dos revisores de la lista de revisores
+    //enviar correo indicando que se les ha asignado el articulo
+  } //
 
 
 

@@ -55,8 +55,8 @@ public class Editorial {
         Autor autor = Autor.ingresarDatosAutor(sc); 
         escribirArchivo("autores.txt", autor.toString()); // guarda los datos ingresados en su respectivo archivo
         Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
-        autor.setArticulo(articulo); // VER COMO  AGREGAR  EL ARTICULO EN EL ARCHIVO DE AUTOR
-        escribirArchivo("articulos.txt", articulo.toString());// guarda los datos ingresados en su rescpectivo archivo
+        autor.setArticulo(articulo);
+        escribirArchivo("articulos.txt", articulo.toString());// guarda los datos ingresados en su respectivo archivo
         System.out.println("Desea enviar el artículo a revisión 'S' , 'N': "); //SI : 'S' , NO : 'N'
         String opc2 = sc.nextLine();
         if (opc2.equalsIgnoreCase("S")){
@@ -69,7 +69,6 @@ public class Editorial {
 //Asignar automaticamente a dos revisores de la lista de revisores
 //Enviar un correo a los revisores indicando que se les ha asignado un articulo(en el contenido del mail incluir a los datos del articulo)
 
-public void asignarRevisores(Articulo articulo, ArrayList<Revisor> revisores){}
 
 public void notificarAutor(Articulo articulo, EstadoArticulo decision){}
 
