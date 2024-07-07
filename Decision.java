@@ -1,4 +1,4 @@
-public enum Decision{
+enum Decision{
   ACEPTADO, 
   RECHAZADO,
   PENDIENTE
