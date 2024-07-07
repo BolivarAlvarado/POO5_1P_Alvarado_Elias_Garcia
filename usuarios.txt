@@ -1,4 +1,4 @@
-EDITOR,Juan,Caicedo,juCaice,adminpass
+EDITOR,Juan,Caicedo,juCaice,password
 REVISOR,Valeria,Brown,valeriabrown,password
 EDITOR,Bolivar,Uno,bolivaruno,password
 REVISOR,Andres,Moran,andresmoran,password

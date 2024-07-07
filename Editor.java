@@ -56,6 +56,13 @@ public class Editor extends Usuario{
     sc.close();
   }
 
+  public void mostarTareaRealizar(){
+    System.out.println("Tarea a realizar de: " + getNombre() + " " + getApellido());
+    System.out.println("Registro de decisión final del artīculo"); 
+    decidirSobreArticulo();
+    //notificar al autor sobre la decision final del articulo
+  }
+
 
 
 

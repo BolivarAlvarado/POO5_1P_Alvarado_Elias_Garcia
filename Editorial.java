@@ -12,7 +12,7 @@ public class Editorial {
     public static void main(String[] args) {
         // Crear editor, revisor a partir del archivo de usuarios
         cargarUsuarios();
-        usuarios.forEach(u -> System.out.println("Usuario: " + u.getUser() + ", Nombre: " + u.getNombre()));
+        usuarios.forEach(u -> System.out.println("Usuario: " + u.getUser() + ", Contraseña: " + u.getPassword()+", ROL: " + u.getRol() ));
         //Mostrar las opciones 
         mostrarMenu();
     }
@@ -63,17 +63,10 @@ public class Editorial {
                 System.out.println("Bienvenido.... "); // mensaje de bienvenida
                 if (usuario instanceof Revisor){
                     Revisor revisor = (Revisor) usuario;
-                    System.out.println("Tarea a realizar de: " + revisor.getNombre() + " " + revisor.getApellido());
-                    System.out.println("Revisión de artículo");
-                    revisor.proporcionarComentarios();
-                    revisor.decidirSobreArticulo();
-                    //proporcionar comentarios y una decision
+                    revisor.mostrarTareaRealizar();
                 }else if(usuario instanceof Editor){
                     Editor editor = (Editor) usuario;
-                    System.out.println("Tarea a realizar de: " + editor.getNombre() + " " + editor.getApellido());
-                    System.out.println("Registro de decisión final del artīculo"); 
-                    editor.decidirSobreArticulo();
-                    //notificar al autor sobre la decision final del articulo
+                    editor.mostarTareaRealizar();
                 }
                 break;
             } 

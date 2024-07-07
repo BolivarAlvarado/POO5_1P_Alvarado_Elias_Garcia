@@ -59,6 +59,14 @@ public class Revisor extends Usuario{
     sc.close();
   }
 
+  public void mostrarTareaRealizar(){
+    System.out.println("Tarea a realizar de: " + getNombre() + " " + getApellido());
+    System.out.println("Revisión de artículo");
+    proporcionarComentarios();
+    decidirSobreArticulo();
+    //proporcionar comentarios y una decision
+  }
+
 
 
 
