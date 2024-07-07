@@ -56,7 +56,7 @@ public class Editorial {
     public static void mostrarUsuariosAsignados(){
         for(Revisor revisor : Editorial.revisores){
             if(revisor.getArticulo() != null){
-                System.out.println("Usuario: "+revisor.getUser() + ", Contraseña: "+revisor.getPassword() + ", Artículo asignado: "+revisor.getArticulo().getTitulo() + "Rol: ");
+                System.out.println("Usuario: "+revisor.getUser() + ", Contraseña: "+revisor.getPassword() + ", Artículo asignado: "+revisor.getArticulo().getTitulo());
             }
         }
     }
@@ -76,6 +76,7 @@ public class Editorial {
                 if (usuario instanceof Revisor){
                     Revisor revisor = (Revisor) usuario;
                     revisor.mostrarTareaRealizar();
+                    break;
                 }else if(usuario instanceof Editor){
                     Editor editor = (Editor) usuario;
                     editor.mostarTareaRealizar();
@@ -118,7 +119,6 @@ public class Editorial {
                 System.out.println("Opcion invalida");
                     break;
             }
- 
         }while(op!=2);
         sc.close();
 

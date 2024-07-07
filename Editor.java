@@ -39,26 +39,25 @@ public class Editor extends Usuario{
         break;
       }
     }
-    sc.close();
    }
 
    public void tomarDecision(Revision revision){
     Scanner sc = new Scanner(System.in);
-    System.out.println("Revisor: " + revision.getRevisor().getNombre() + " " + revision.getRevisor().getApellido());
-    System.out.println("Ingrese su decision para el artículo " + revision.getArticulo().getTitulo());
-    System.out.println("1. Aceptar");
-    System.out.println("2. Rechazar");
+    System.out.println("Editor: " + getNombre() + " " + getApellido());
+    System.out.println("Ingrese su decisión para el artículo: " + revision.getArticulo().getTitulo());
+    System.out.println("1. ACEPTAR");
+    System.out.println("2. RECHAZAR");
     int decision = sc.nextInt();
     sc.nextLine();
     switch (decision) {
       case 1:
-        this.estadoArticulo = EstadoArticulo.PUBLICADO;
+        estadoArticulo = EstadoArticulo.PUBLICADO;
         break;
       case 2:
-        this.estadoArticulo = EstadoArticulo.RECHAZADO;
+        estadoArticulo = EstadoArticulo.RECHAZADO;
         break;
       default:
-      System.out.println("Opcion no valida");
+      System.out.println("Opción no válida");
         break;
     }
     sc.close();

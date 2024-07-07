@@ -16,3 +16,7 @@ Nombre: bolivar, Apellido: alvarado, Código: X1QUB, Correo Electrónico: boliva
 Nombre: bolivar, Apellido: alvarado, Código: Z1CE7, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
 -----------------------------
 Nombre: bolivar, Apellido: alvarado, Código: N1KPR, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
+-----------------------------
+Nombre: bolivar, Apellido: alvarado, Código: VJPZG, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
+-----------------------------
+Nombre: bolivar, Apellido: alvarado, Código: FM4B9, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []

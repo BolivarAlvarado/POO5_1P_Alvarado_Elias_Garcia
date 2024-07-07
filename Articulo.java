@@ -50,7 +50,7 @@ public class Articulo{
       String pClave = sc.nextLine();
       palabrasClaves.add(pClave);
     }
-    System.out.print("Ingrese resumen del artículo:");
+    System.out.print("Ingrese resumen del artículo: ");
     String resumen = sc.nextLine();
 
     return new Articulo(autor,titulo,contenido,palabrasClaves,EstadoArticulo.INGRESADO,resumen);

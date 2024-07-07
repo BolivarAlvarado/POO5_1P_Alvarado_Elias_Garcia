@@ -60,7 +60,7 @@ public class Revisor extends Usuario{
     for(Revision revision : Editorial.revisiones){
       if(revision.getArticulo().getTitulo().equals(nombreArticulo)){
           System.out.println("Revisor: " + this.getNombre() + " " + this.getApellido());
-          System.out.println("Ingrese los comentarios del artículo " + revision.getArticulo().getTitulo() + ":");
+          System.out.println("Ingrese los comentarios del artículo: " + revision.getArticulo().getTitulo() );
           String comentario = sc.nextLine();
           revision.agregarComentario(comentario);
           decidirSobreArticulo();
