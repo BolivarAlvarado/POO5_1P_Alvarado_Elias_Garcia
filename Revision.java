@@ -8,9 +8,9 @@ public class Revision{
   private ArrayList<String> comentarios; // comentarios del revisor
   private Decision decision; // decisiion del articulo
 
-  public Revision(Articulo articulo, Revisor revisor){
+  public Revision(Revisor revisor){
     this.revisor = revisor;
-    this.articulo = articulo;
+    this.articulo = revisor.getArticulo();
     this.comentarios = new ArrayList<>();
     this.decision = null;
     Editorial.revisiones.add(this);
@@ -25,20 +25,66 @@ public class Revision{
 public void notificarAutor(Articulo articulo, EstadoArticulo decision){}
 
 
-public static void enviarCorreo(Articulo articulo, Revisor revisor){
-  System.out.println(revisor.getNombre() + revisor.getApellido() + " se le ha asignado la revision del artículo: " + articulo.getTitulo());
-  System.out.println("Datos del Artículo: \n" + "Titulo: "+articulo.getTitulo() + "\n" + "Autor: "+articulo.getAutor() + "\n" + "Contenido" + "\n" +articulo.getContenido()+"\n"  +"Resumen"+ "\n"  + articulo.getResumen());
-  
+public static void verificarRevision(Revisor revisor1, Revisor revisor2) {
+  Revision revision1 = new Revision(revisor1);
+  if(Editorial.revisiones.contains(revision1)){
+    System.out.println("La revisión ya se encuentra en la lista de revisiones");
+  }else{
+    System.out.println("Revisión del artículo: " + revision1.getArticulo().getTitulo() + "agregada");
+    Editorial.revisiones.add(revision1);
+  }
+
+  Revision revision2 = new Revision(revisor2);
+  if(Editorial.revisiones.contains(revision2)){
+    System.out.println("La revisión ya se encuentra en la lista de revisiones");
+  }else{
+    System.out.println("Revisión del artículo: " + revision2.getArticulo().getTitulo() + "agregada");
+    Editorial.revisiones.add(revision2);
+  }
+  System.out.println("Inicie sesión para proporcionar comentarios y tomar su decisión");
+  // boolean existeRevision = false;
+
+  // for (Revision revision : Editorial.revisiones) {
+  //     if (revision.getArticulo().getCodigoArti().equals(articulo.getCodigoArti())) {
+  //         // Proporcionar comentarios y tomar decisión
+  //         revision.proporcionarComentarios();
+  //         revision.tomarDecision();
+  //         Editorial.escribirArchivo("revisiones.txt", revision.toString());
+  //         existeRevision = true;
+  //     }
+  // }
+
+  // if (!existeRevision) {
+  //     articulo.enviarArticuloARevision();
+  // }
+
 }
 
-  public void proporcionarComentarios(){
-    Scanner sc = new Scanner(System.in);
-    System.out.println("Revisor: " + revisor.getNombre() + " " + revisor.getApellido());
-    System.out.println("Ingrese los comentarios del artículo " + articulo.getTitulo() + ":");
-    String comentario = sc.nextLine();
-    comentarios.add(comentario);
-    
-  }
+
+public static void enviarCorreo(Revisor revisor){
+  System.out.println(revisor.getNombre() + revisor.getApellido() + " se le ha asignado la revision del artículo: " + revisor.getArticulo().getTitulo());
+  System.out.println("Datos del Artículo: \n" + "Titulo: "+revisor.getArticulo().getTitulo() + 
+  "\n" + "Autor: "+revisor.getArticulo().getAutor() + "\n" + "Contenido" + "\n" + 
+  revisor.getArticulo().getContenido()+"\n"  +"Resumen"+ "\n"  + revisor.getArticulo().getResumen());
+  
+}
+//los revisores deben ingresar a la aplicacion para proporcionar comentarios y tomar decision
+//Los cometarios y la decision de los revisores deben almacenarse en el archivo correspondiente
+
+  // public boolean equals(Object obj){ // ver donde usar, implementarlo con equlas
+  //   if( this == obj){
+  //       return true;
+  //   }if( obj == null){
+  //       return false;
+  //   }if( getClass() != obj.getClass()){
+  //       return false;
+  //   }
+  //   Revision revision = (Revision) obj;
+  //   if(!this.articulo.equals(revision.getArticulo())){
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   public void tomarDecision(){
     Scanner sc = new Scanner(System.in);
@@ -81,6 +127,7 @@ public static void enviarCorreo(Articulo articulo, Revisor revisor){
   public ArrayList<String> getComentarios(){
     return comentarios;
   }
+
   public void agregarComentario(String comentario){
     comentarios.add(comentario);
   }

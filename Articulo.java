@@ -80,10 +80,12 @@ public class Articulo{
     Revisor revisor1 = Editorial.revisores.get(r1);
     Revisor revisor2 = Editorial.revisores.get(r2);
 
-    System.out.println("Revisores asignados al artículo: ");
-    System.out.println("Revisor 1: " + revisor1.getNombre() + revisor1.getApellido());
-    System.out.println("Revisor 2: " + revisor2.getNombre() + revisor1.getApellido());
+    System.out.println("Revisores asignados al artículo: " + revisor1.getArticulo().getTitulo());
+    System.out.println(revisor1.getNombre() + " " + revisor1.getApellido());
+    System.out.println(revisor2.getNombre() + " " + revisor1.getApellido());
     
+    //ASIGNAR A UNA REVISION
+    Revision.verificarRevision(revisor1, revisor2);
     //METODO PARA ENVIAR CORREO
   }
 

@@ -52,13 +52,20 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     public static void someterArticulo(Scanner sc){
         Autor autor = Autor.ingresarDatosAutor(sc); 
         Editorial.escribirArchivo("autores.txt", autor.toString()); // guarda los datos ingresados en su respectivo archivo
+
         Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
         autor.setArticulo(articulo);
+
         Editorial.escribirArchivo("articulos.txt", articulo.toString());// guarda los datos ingresados en su respectivo archivo
-        System.out.println("Desea enviar el artículo a revisión 'S' , 'N': "); //SI : 'S' , NO : 'N'
-        String opc2 = sc.nextLine();
-        if (opc2.equalsIgnoreCase("S")){
-            articulo.enviarArticuloARevision(); // COMPLETAR ESTE METODO
+        System.out.println("Iniciar Gestion de Revisión"); 
+        System.out.println("1. ACEPTAR");
+        System.out.println("2. RECHAZAR");
+        System.out.print("Ingresar opción: ");
+        int opc = sc.nextInt();
+        sc.nextLine();
+
+        if (opc == 1){
+            articulo.enviarArticuloARevision(); 
         }
     }
 

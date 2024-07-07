@@ -25,17 +25,19 @@ public class Editorial {
             if(usuario.getPassword().equals(contraV) && usuario.getUser().equals(userV)){ // Comprueba si el usuario, cotraseña ingresado esta en las lista de usuarios
                 comprobarUsuario = true;
                 System.out.println("Bienvenido.... "); // mensaje de bienvenida
-                // Mostrar su tarea a realizar dependiendo del tipo de usuario
-                if (usuario instanceof Revisor){
-                    System.out.println("Tarea a realizar de: " + usuario.getNombre());
+                if (usuario.getRol() == RolUsuario.REVISOR){
                     Revisor revisor = (Revisor) usuario;
+                    System.out.println("Tarea a realizar de: " + revisor.getNombre() + " " + revisor.getApellido());
                     System.out.println("Revisión de artículo");
-                    //Agregar lo demas
-                }else if(usuario instanceof Editor){
-                    System.out.println("Tarea a realizar de: " + usuario.getNombre()); 
+                    revisor.proporcionarComentarios();
+                    revisor.decidirSobreArticulo();
+                    //proporcionar comentarios y una decision
+                }else if(usuario.getRol() == RolUsuario.EDITOR){
                     Editor editor = (Editor) usuario;
+                    System.out.println("Tarea a realizar de: " + editor.getNombre() + " " + editor.getApellido());
                     System.out.println("Registro de decisión final del artīculo"); 
-                    //Agregar lo demas
+                    editor.decidirSobreArticulo();
+                    //notificar al autor sobre la decision final del articulo
                 }
                 break;
             } 
@@ -51,10 +53,10 @@ public class Editorial {
         Scanner sc = new Scanner(System.in);
         int op = 0;
         do{
-            System.out.println("Seleccione una opcion: ");
             System.out.println("0. Someter Articulo");
             System.out.println("1. Iniciar Sesion");
             System.out.println("2. Salir");
+            System.out.print("Seleccione una opcion: ");
             op = sc.nextInt();
             sc.nextLine();
             switch (op) {
@@ -71,7 +73,7 @@ public class Editorial {
                     System.out.println("Salir");
                     break;
                 default:
-                System.out.println("Opcion no valida");
+                System.out.println("Opcion invalida");
                     break;
             }
  
@@ -79,24 +81,22 @@ public class Editorial {
         sc.close();
 
     }
+    
+    // public boolean equals(Object obj){ // ver donde usar, implementarlo con equlas
+    //     if( this == obj){
+    //         return true;
+    //     }if( obj == null){
+    //         return false;
+    //     }if( getClass() != obj.getClass()){
+    //         return false;
+    //     }
+    //     Usuario user = (Usuario) obj;
+    //     if(!this.equals(revision.getArticulo())){
+    //       return false;
+    //     }
+    //     return true;
+    //   }
 
-    public void verificarRevision(Articulo articulo, Revisor revisor) {
-        boolean existeRevision = false;
-    
-        for (Revision revision : revisiones) {
-            if (revision.getArticulo().getCodigoArti().equals(articulo.getCodigoArti())) {
-                // Proporcionar comentarios y tomar decisión
-                revision.proporcionarComentarios();
-                revision.tomarDecision();
-                escribirArchivo("revisiones.txt", revision.toString());
-                existeRevision = true;
-            }
-        }
-    
-        if (!existeRevision) {
-            articulo.enviarArticuloARevision();
-        }
-    }
     
 
 // metodo para escribir en los archivos
