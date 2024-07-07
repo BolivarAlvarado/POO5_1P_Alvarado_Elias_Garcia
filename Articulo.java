@@ -35,34 +35,36 @@ public class Articulo{
   }
 
   public static Articulo ingresarDatosArticulo(Scanner sc, Autor autor){
-    System.out.println("Ingrese el título del artículo: ");
+    System.out.println("------------------------------------");
+    System.out.println("Autor: " + autor.getNombre() + " " + autor.getApellido());
+    System.out.print("Ingrese el título del artículo: ");
     String titulo = sc.nextLine();
-    System.out.println("Ingrese el contenido del artículo: ");
+    System.out.print("Ingrese el contenido del artículo: ");
     String contenido = sc.nextLine();
-    System.out.println("Ingrese la cantidad de palabras clave que va ingresar: ");
+    System.out.print("Ingrese la cantidad de palabras clave que va ingresar: ");
     int cantP = sc.nextInt();
     sc.nextLine();
     ArrayList<String> palabrasClaves = new ArrayList<>();
     for(int i = 0; i < cantP;i++){
-      System.out.println("Ingrese la palabra clave: ");
+      System.out.println("Ingrese la palabra clave N(" +i+")");
       String pClave = sc.nextLine();
       palabrasClaves.add(pClave);
     }
-    System.out.println("Ingrese resumen del artículo:");
+    System.out.print("Ingrese resumen del artículo:");
     String resumen = sc.nextLine();
 
     return new Articulo(autor,titulo,contenido,palabrasClaves,EstadoArticulo.INGRESADO,resumen);
   }
   @Override
   public String toString(){
-    return "------------------------------\n"
-    +"Autor: "+ autor.getNombre() + " " + autor.getApellido() + ", Título: " + titulo + "Código: "+ codigoArti + ", Contenido: " + contenido +  
+    return "Autor: "+ autor.getNombre() + " " + autor.getApellido() + ", Título: " + titulo + "Código: "+ codigoArti + ", Contenido: " + contenido +  
     ", Palabras Claves: " + palabrasClaves.toString() + ", Estado artículo: " + estado + ", Resumen: " 
     + resumen;
   }
 
 
   public void enviarArticuloARevision(){
+    System.out.println("---------------------------------------");
     //Asignar a dos revisores de la lista de revisores
     //enviar correo indicando que se les ha asignado el articulo
     this.estado = EstadoArticulo.EN_REVISION;
@@ -88,8 +90,8 @@ public class Articulo{
       revisor2.setArticulo(this);
   
       System.out.println("Revisores asignados al artículo: " + revisor1.getArticulo().getTitulo());
-      System.out.println(revisor1.getNombre() + " " + revisor1.getApellido());
-      System.out.println(revisor2.getNombre() + " " + revisor1.getApellido());
+      System.out.println(" - " + revisor1.getNombre() + " " + revisor1.getApellido());
+      System.out.println(" - " + revisor2.getNombre() + " " + revisor1.getApellido());
       
       //ASIGNAR A UNA REVISION
       Revision.verificarRevision(revisor1, revisor2);

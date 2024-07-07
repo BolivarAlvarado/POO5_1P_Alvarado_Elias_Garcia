@@ -29,7 +29,7 @@ public static void verificarRevision(Revisor revisor1, Revisor revisor2) {
   Revision revision1 = new Revision(revisor1);
 
   if(Editorial.revisiones.contains(revision1)){
-    System.out.println("La revisión ya se encuentra en la lista de revisiones");
+    //System.out.println("La revisión ya se encuentra en la lista de revisiones");
   }else{
     System.out.println("Revisión del artículo: " + revision1.getArticulo().getTitulo() + "agregada");
     Editorial.revisiones.add(revision1);
@@ -43,6 +43,7 @@ public static void verificarRevision(Revisor revisor1, Revisor revisor2) {
     Editorial.revisiones.add(revision2);
   }
   System.out.println("Inicie sesión para proporcionar comentarios y tomar su decisión");
+  System.out.println("-------------------------------------------");
   
   // boolean existeRevision = false;
 

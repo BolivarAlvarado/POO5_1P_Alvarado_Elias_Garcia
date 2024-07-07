@@ -34,15 +34,15 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 
     public static Autor ingresarDatosAutor(Scanner sc){
-        System.out.println("Ingrese su nombre: ");
+        System.out.print("Ingrese su nombre: ");
         String nombre = sc.nextLine();
-        System.out.println("Ingrese su apellido: ");
+        System.out.print("Ingrese su apellido: ");
         String apellido = sc.nextLine();
-        System.out.println("Ingrese su correo Electrónico: ");
+        System.out.print("Ingrese su correo Electrónico: ");
         String correoElectronico = sc.nextLine();
-        System.out.println("Ingrese su institución: ");
+        System.out.print("Ingrese su institución: ");
         String institucion = sc.nextLine();
-        System.out.println("Ingrese su campo de investigación: ");
+        System.out.print("Ingrese su campo de investigación: ");
         String campoInvestigacion = sc.nextLine();
         return new Autor(nombre, apellido, correoElectronico, institucion, campoInvestigacion);
     }
@@ -56,11 +56,11 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
         autor.setArticulo(articulo);
         articulo.setAutor(autor);
-        
+
         Editorial.escribirArchivo("articulos.txt",articulo.toString());// guarda los datos ingresados en su respectivo archivo
-        System.out.println("Iniciar Gestion de Revisión"); 
-        System.out.println("1. ACEPTAR");
-        System.out.println("2. RECHAZAR");
+        System.out.println("---------------------------------------");
+        System.out.println("Iniciar Gestion de Revisión?"); 
+        System.out.println("Pulse 1 si desea continuar, caso contrario puse cualquier otro número:");
         System.out.print("Ingresar opción: ");
         int opc = sc.nextInt();
         sc.nextLine();

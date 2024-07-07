@@ -53,9 +53,17 @@ public class Editorial {
             e.printStackTrace();
         }
     }
+    public static void mostrarUsuariosAsignados(){
+        for(Revisor revisor : Editorial.revisores){
+            if(revisor.getArticulo() != null){
+                System.out.println("Usuario: "+revisor.getUser() + ", Contraseña: "+revisor.getPassword() + ", Artículo asignado: "+revisor.getArticulo().getTitulo() + "Rol: ");
+            }
+        }
+    }
 
     //metodo para iniciar Sesión
     public static void iniciarSesion(Scanner sc){
+        mostrarUsuariosAsignados();
         System.out.println("Ingrese su usuario: ");
         String userV = sc.nextLine();
         System.out.println("Ingrese su contraseña: ");
@@ -77,6 +85,7 @@ public class Editorial {
         }
         if(!comprobarUsuario){
             System.out.println("Usuario o contraseña incorrectos...");
+            System.out.println("-----------------------------------------");
         }
     }
 
@@ -99,7 +108,7 @@ public class Editorial {
                     //asignar automaticamente a dos revisores  de la lista de revisores
                     break;
                 case 1:
-                    System.out.println("Ha escogido la opcion de Iniciar Sesion");
+                    System.out.println("Ha escogido la opcion de Iniciar Sesión");
                     iniciarSesion(sc);
                     break;
                 case 2:

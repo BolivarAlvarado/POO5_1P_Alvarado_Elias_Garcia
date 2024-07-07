@@ -8,3 +8,11 @@ Autor: bolivar alvarado, Título: tituloCódigo: 9BOFQ, Contenido: conte, Palabr
 Autor: bolivar alvarado, Título: tituloCódigo: 02FH1, Contenido: contenido, Palabras Claves: [clave], Estado artículo: INGRESADO, Resumen: resumen
 ------------------------------
 Autor: bolivar alvarado, Título: tituloCódigo: 5UTK8, Contenido: contenido, Palabras Claves: [clave], Estado artículo: INGRESADO, Resumen: resumen
+------------------------------
+Autor: bolivar alvarado, Título: tituloCódigo: RG8EE, Contenido: contenido, Palabras Claves: [clave], Estado artículo: INGRESADO, Resumen: resumen
+------------------------------
+Autor: bolivar alvarado, Título: Handbook ok physicsCódigo: GVDR8, Contenido: contenido, Palabras Claves: [hand], Estado artículo: INGRESADO, Resumen: resumen
+------------------------------
+Autor: bolivar alvarado, Título: tituloCódigo: ISVTM, Contenido: contenido, Palabras Claves: [1], Estado artículo: INGRESADO, Resumen: resumen
+------------------------------
+Autor: bolivar alvarado, Título: tituloCódigo: 2RDHQ, Contenido: contenido, Palabras Claves: [p1, p2, p3], Estado artículo: INGRESADO, Resumen: resumen

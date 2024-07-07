@@ -25,24 +25,27 @@ public class Revisor extends Usuario{
   @Override
   public void decidirSobreArticulo(){//ver si se pasa articulo como parametro
     Scanner sc = new Scanner(System.in);
+    System.out.print("Ingrese su especialidad: ");
+    String especialidad = sc.nextLine();
     System.out.println("Tomar decisión sobre el articulo: " + articulo.getTitulo());
     System.out.println("1. ACEPTAR");
     System.out.println("2. RECHAZAR");
     int opc = sc.nextInt();
     sc.nextLine();
-    System.out.print("Ingrese su especialidad: ");
-    String especialidad = sc.nextLine();
     switch (opc) {
       case 1:
         this.decisionRevisor = Decision.ACEPTADO;
         this.especialidad = especialidad;
         this.numArtRe++;
         Editorial.escribirArchivo("revisores.txt", toString());
+        System.out.println("Volviendo al menú....");
         break;
       case 2:
         this.decisionRevisor = Decision.RECHAZADO;
         this.especialidad = especialidad;
         this.numArtRe++;
+        Editorial.escribirArchivo("revisores.txt", toString());
+        System.out.println("Volviendo al menú....");
         break;
       default:
       System.out.println("Opcion invalida");
