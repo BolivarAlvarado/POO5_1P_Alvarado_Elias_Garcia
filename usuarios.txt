@@ -1,9 +1,9 @@
-EDITOR,Juan,Caicedo,janesmith,adminpass
-REVISOR,Valeria,Brown,bobbrown,reviewpass
-EDITOR,Bolivar,Alvarado,janesmith,adminpass
-REVISOR,Andres,Moran,bobbrown,reviewpass
-EDITOR,Jeremy,Dorado,janesmith,adminpass
-REVISOR,Maria,Noboa,bobbrown,reviewpass
-EDITOR,Derlis,Gonzales,janesmith,adminpass
-REVISOR,Isaac,Benitez,bobbrown,reviewpass
+EDITOR,Juan,Caicedo,juCaice,adminpass
+REVISOR,Valeria,Brown,valeriabrown,password
+EDITOR,Bolivar,Uno,bolivaruno,password
+REVISOR,Andres,Moran,andresmoran,password
+EDITOR,Jeremy,Dos,jeremydos,password
+REVISOR,Maria,Noboa,marianoboa,password
+EDITOR,Derlis,Gonzalez,derlisgonzalez,password
+REVISOR,Isaac,Benitez,isaacbenitez,password
 
