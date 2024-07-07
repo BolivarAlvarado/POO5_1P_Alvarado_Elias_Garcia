@@ -97,8 +97,8 @@ public class Editorial {
         do{
             System.out.println("1. Someter Articulo");
             System.out.println("2. Iniciar Sesion");
-            System.out.println("3. Mostar Usuarios");
-            System.out.println("4. Mostrar revisores asignados");
+            //System.out.println("3. Mostar Usuarios");
+            //System.out.println("4. Mostrar revisores asignados");
             System.out.println("5.. Salir");
             System.out.print("Seleccione una opción: ");
             op = sc.nextInt();
@@ -113,11 +113,11 @@ public class Editorial {
                     System.out.println("Ha escogido la opcion de Iniciar Sesión");
                     iniciarSesion(sc);
                     break;
-                case 3:
-                    cargarUsuarios();
-                    break;
-                case 4:
-                    mostrarUsuariosAsignados();
+                // case 3:
+                //         cargarUsuarios();
+                //     break;
+                // case 4:
+                //     mostrarUsuariosAsignados();
                 case 5:
                     System.out.println("Salir");
                     break;
