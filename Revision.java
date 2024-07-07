@@ -68,26 +68,6 @@ public static void enviarCorreo(Articulo articulo, Revisor revisor){
 
   }
   
-  public void verificarRevision(Articulo articulo, Revisor revisor) {
-    boolean existeRevision = false;
-
-    for (Revision revision : Editorial.revisiones) {
-        if (revision.getArticulo().getCodigoArti().equals(articulo.getCodigoArti())) {
-            // Proporcionar comentarios y tomar decisión
-            revision.proporcionarComentarios();
-            revision.tomarDecision();
-            Editorial.escribirArchivo("revisiones.txt", revision.toString());
-            existeRevision = true;
-        }
-    }
-
-    if (!existeRevision) {
-        // Si no hay revisión existente, asignar revisores al artículo
-        articulo.enviarArticuloARevision();
-    }
-}
-
-  
   public Articulo getArticulo(){
     return articulo;
   }

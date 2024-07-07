@@ -94,14 +94,10 @@ public class Editorial {
         }
     
         if (!existeRevision) {
-            // Si no hay revisión existente, asignar revisores al artículo
             articulo.enviarArticuloARevision();
         }
     }
-
-
-
-
+    
 
 // metodo para escribir en los archivos
         public static void escribirArchivo(String nombreArchivo, Object objeto) {
