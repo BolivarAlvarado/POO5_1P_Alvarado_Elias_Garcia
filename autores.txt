@@ -1,22 +1,4 @@
 -----------------------------
-Nombre: Bolivar, Apellido: Alvarado, Código: TAM2E, Correo Electrónico: bolsaalv@gmail.com, Institución: espol, Campo de investigación: Ciencias, Artículos: []
+Nombre: bolivar, Apellido: alvarado, Código: A7G0S, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
 -----------------------------
-Nombre: bolivar, Apellido: alvarado, Código: GH90R, Correo Electrónico: bolsaalv@gmail.com, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: XA2OK, Correo Electrónico: bolsaalv@epsol, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: MQNRS, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: 0T9A3, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: P2KTN, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: X1QUB, Correo Electrónico: bolivaralvarado@gmail.com, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: Z1CE7, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: N1KPR, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: VJPZG, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: FM4B9, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
+Nombre: bolivar, Apellido: alvarado, Código: JGB7V, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []

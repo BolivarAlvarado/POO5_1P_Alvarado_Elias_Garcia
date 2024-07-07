@@ -63,7 +63,6 @@ public class Editorial {
 
     //metodo para iniciar Sesión
     public static void iniciarSesion(Scanner sc){
-        mostrarUsuariosAsignados();
         System.out.println("Ingrese su usuario: ");
         String userV = sc.nextLine();
         System.out.println("Ingrese su contraseña: ");
@@ -96,30 +95,37 @@ public class Editorial {
         Scanner sc = new Scanner(System.in);
         int op = 0;
         do{
-            System.out.println("0. Someter Articulo");
-            System.out.println("1. Iniciar Sesion");
-            System.out.println("2. Salir");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("1. Someter Articulo");
+            System.out.println("2. Iniciar Sesion");
+            System.out.println("3. Mostar Usuarios");
+            System.out.println("4. Mostrar revisores asignados");
+            System.out.println("5.. Salir");
+            System.out.print("Seleccione una opción: ");
             op = sc.nextInt();
             sc.nextLine();
             switch (op) {
-                case 0:
+                case 1:
                     System.out.println("Ha escogido la opcion de someter articulo");
                     Autor.someterArticulo(sc);
                     //asignar automaticamente a dos revisores  de la lista de revisores
                     break;
-                case 1:
+                case 2:
                     System.out.println("Ha escogido la opcion de Iniciar Sesión");
                     iniciarSesion(sc);
                     break;
-                case 2:
+                case 3:
+                    cargarUsuarios();
+                    break;
+                case 4:
+                    mostrarUsuariosAsignados();
+                case 5:
                     System.out.println("Salir");
                     break;
                 default:
                 System.out.println("Opcion invalida");
                     break;
             }
-        }while(op!=2);
+        }while(op!=5);
         sc.close();
 
     }

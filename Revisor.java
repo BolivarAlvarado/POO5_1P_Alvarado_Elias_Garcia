@@ -63,7 +63,7 @@ public class Revisor extends Usuario{
           System.out.println("Ingrese los comentarios del artículo: " + revision.getArticulo().getTitulo() );
           String comentario = sc.nextLine();
           revision.agregarComentario(comentario);
-          decidirSobreArticulo();
+          break;
       }
     }
   }
@@ -72,6 +72,7 @@ public class Revisor extends Usuario{
     System.out.println("Tarea a realizar de: " + getNombre() + " " + getApellido());
     System.out.println("Revisión de artículo");
     proporcionarComentarios();
+    decidirSobreArticulo();
     //proporcionar comentarios y una decision
   }
 

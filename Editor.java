@@ -36,7 +36,8 @@ public class Editor extends Usuario{
         System.out.println("------------------------------------ ");
         tomarDecision(revision);
         //revision.toString(); // mostrar datos de la revision
-        break;
+      }else{
+        System.out.println("Codigo no encontrado...");
       }
     }
    }
