@@ -114,7 +114,7 @@ public class Editorial {
                     iniciarSesion(sc);
                     break;
                 // case 3:
-                //         cargarUsuarios();
+                //         cargarUsuarios(); // VER COMO IMPLEMENTAR CORRECTAMENTE
                 //     break;
                 // case 4:
                 //     mostrarUsuariosAsignados();
