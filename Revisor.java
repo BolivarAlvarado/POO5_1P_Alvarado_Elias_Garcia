@@ -10,6 +10,7 @@ public class Revisor extends Usuario{
     super(user,password,nombre,apellido,RolUsuario.REVISOR);
     this.correoElectronico = generarCorreoElectronico(nombre, apellido);
     this.decisionRevisor = Decision.PENDIENTE;
+    this.numArtRe = 0;
     Editorial.revisores.add(this);
   }
 
@@ -22,49 +23,58 @@ public class Revisor extends Usuario{
 
 
   @Override
-  public void decidirSobreArticulo(){
+  public void decidirSobreArticulo(){//ver si se pasa articulo como parametro
     Scanner sc = new Scanner(System.in);
     System.out.println("Tomar decisión sobre el articulo: " + articulo.getTitulo());
     System.out.println("1. ACEPTAR");
     System.out.println("2. RECHAZAR");
     int opc = sc.nextInt();
     sc.nextLine();
+    System.out.print("Ingrese su especialidad: ");
+    String especialidad = sc.nextLine();
     switch (opc) {
       case 1:
         this.decisionRevisor = Decision.ACEPTADO;
+        this.especialidad = especialidad;
+        this.numArtRe++;
+        Editorial.escribirArchivo("revisores.txt", toString());
         break;
       case 2:
         this.decisionRevisor = Decision.RECHAZADO;
+        this.especialidad = especialidad;
+        this.numArtRe++;
         break;
       default:
       System.out.println("Opcion invalida");
         break;
     }
-    sc.close();
-    this.numArtRe++;
   }
 
     public void proporcionarComentarios(){
     Scanner sc = new Scanner(System.in);
-    System.out.print("Ingrese el artículo del cual desea proporcionar comentarios: ");
+    System.out.print("Ingrese el titulo del artículo del cual desea proporcionar comentarios: ");
     String nombreArticulo = sc.nextLine();
     for(Revision revision : Editorial.revisiones){
-      if(revision.getArticulo().getTitulo().equalsIgnoreCase((nombreArticulo))){
+      if(revision.getArticulo().getTitulo().equals(nombreArticulo)){
           System.out.println("Revisor: " + this.getNombre() + " " + this.getApellido());
-          System.out.println("Ingrese los comentarios del artículo " + articulo.getTitulo() + ":");
+          System.out.println("Ingrese los comentarios del artículo " + revision.getArticulo().getTitulo() + ":");
           String comentario = sc.nextLine();
           revision.agregarComentario(comentario);
+          decidirSobreArticulo();
       }
     }
-    sc.close();
   }
 
   public void mostrarTareaRealizar(){
     System.out.println("Tarea a realizar de: " + getNombre() + " " + getApellido());
     System.out.println("Revisión de artículo");
     proporcionarComentarios();
-    decidirSobreArticulo();
     //proporcionar comentarios y una decision
+  }
+
+  public String toString(){
+    return "Nombre: " + nombre + ", Apellido: " + apellido + ", Especialidad: " + especialidad + ", Artículo: "
+    + articulo.getTitulo() + ", Decisión: " + decisionRevisor + ", Artículos revisados: " + numArtRe;
   }
 
 

@@ -33,11 +33,15 @@ public class Editorial {
                     switch (rolUsuario) {
                         case "EDITOR":
                             // Crear y agregar editor a la lista de usuarios
-                            usuarios.add(new Editor(user, password, nombre, apellido));
+                            Editor editor = new Editor(user, password, nombre, apellido);
+                            usuarios.add(editor);
+                            //editores.add(editor);
                             break;
                         case "REVISOR":
                             // Crear y agregar revisor a la lista de usuarios
-                            usuarios.add(new Revisor(user, password, nombre, apellido));
+                            Revisor revisor = new Revisor(user, password, nombre, apellido);
+                            usuarios.add(revisor);
+                            //revisores.add(revisor);
                             break;
                         default:
                             System.out.println("Tipo de usuario no permitido: " + rolUsuario);

@@ -56,7 +56,7 @@ public class Articulo{
   @Override
   public String toString(){
     return "------------------------------\n"
-    +"Autor: " + autor.getNombre() + ", Título: " + titulo + "Código: "+ codigoArti + ", Contenido: " + contenido +  
+    +"Autor: "+ autor.getNombre() + " " + autor.getApellido() + ", Título: " + titulo + "Código: "+ codigoArti + ", Contenido: " + contenido +  
     ", Palabras Claves: " + palabrasClaves.toString() + ", Estado artículo: " + estado + ", Resumen: " 
     + resumen;
   }
@@ -71,22 +71,31 @@ public class Articulo{
 
   private void asignarRevisores(){
     Random rd = new Random();
-    int r1 = rd.nextInt(Editorial.revisores.size());
-    int r2;
-    do{
-      r2 = rd.nextInt(Editorial.revisores.size());
-    } while(r2 == r1);
+    if (Editorial.revisores.size() < 2){
+      System.out.println("No hay suficientes revisores");
+    }else{
+      int r1 = rd.nextInt(Editorial.revisores.size());
+      int r2;
+      do{
+        r2 = rd.nextInt(Editorial.revisores.size());
+      } while(r2 == r1);
+  
+      Revisor revisor1 = Editorial.revisores.get(r1);
+      revisor1.setArticulo(this);
+      //Revision revision1 = new Revision(revisor1);
+      Revisor revisor2 = Editorial.revisores.get(r2);
+      //Revision revision2 = new Revision(revisor2);
+      revisor2.setArticulo(this);
+  
+      System.out.println("Revisores asignados al artículo: " + revisor1.getArticulo().getTitulo());
+      System.out.println(revisor1.getNombre() + " " + revisor1.getApellido());
+      System.out.println(revisor2.getNombre() + " " + revisor1.getApellido());
+      
+      //ASIGNAR A UNA REVISION
+      Revision.verificarRevision(revisor1, revisor2);
+      //METODO PARA ENVIAR CORREO
+    }
 
-    Revisor revisor1 = Editorial.revisores.get(r1);
-    Revisor revisor2 = Editorial.revisores.get(r2);
-
-    System.out.println("Revisores asignados al artículo: " + revisor1.getArticulo().getTitulo());
-    System.out.println(revisor1.getNombre() + " " + revisor1.getApellido());
-    System.out.println(revisor2.getNombre() + " " + revisor1.getApellido());
-    
-    //ASIGNAR A UNA REVISION
-    Revision.verificarRevision(revisor1, revisor2);
-    //METODO PARA ENVIAR CORREO
   }
 
 

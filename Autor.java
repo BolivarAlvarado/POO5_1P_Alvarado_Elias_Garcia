@@ -55,8 +55,9 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
         autor.setArticulo(articulo);
-
-        Editorial.escribirArchivo("articulos.txt", articulo.toString());// guarda los datos ingresados en su respectivo archivo
+        articulo.setAutor(autor);
+        
+        Editorial.escribirArchivo("articulos.txt",articulo.toString());// guarda los datos ingresados en su respectivo archivo
         System.out.println("Iniciar Gestion de Revisión"); 
         System.out.println("1. ACEPTAR");
         System.out.println("2. RECHAZAR");
@@ -81,8 +82,14 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 
 
+
+
     public String getNombre(){
         return nombre;
+    }
+
+    public String getApellido(){
+        return apellido;
     }
 
     public void setArticulo(Articulo articulo){

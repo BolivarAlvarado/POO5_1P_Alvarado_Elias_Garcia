@@ -1,0 +1,10 @@
+------------------------------
+Autor: Bolivar Alvarado, Título: dos rosas Código: VGB74, Contenido: contenido, Palabras Claves: [gato], Estado artículo: INGRESADO, Resumen: resumen
+------------------------------
+Autor: bolivar alvarado, Título: titulo1Código: EYM9X, Contenido: contenido1, Palabras Claves: [no], Estado artículo: INGRESADO, Resumen: resumen
+------------------------------
+Autor: bolivar alvarado, Título: tituloCódigo: 9BOFQ, Contenido: conte, Palabras Claves: [f], Estado artículo: INGRESADO, Resumen: fa
+------------------------------
+Autor: bolivar alvarado, Título: tituloCódigo: 02FH1, Contenido: contenido, Palabras Claves: [clave], Estado artículo: INGRESADO, Resumen: resumen
+------------------------------
+Autor: bolivar alvarado, Título: tituloCódigo: 5UTK8, Contenido: contenido, Palabras Claves: [clave], Estado artículo: INGRESADO, Resumen: resumen

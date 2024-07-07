@@ -3,6 +3,7 @@ public class Editor extends Usuario{
    private String nombreJournal;
    private Revision revision;
    private EstadoArticulo estadoArticulo;
+   
 
 
   public Editor(String user, String password, String nombre, String apellido){
@@ -10,6 +11,7 @@ public class Editor extends Usuario{
     this.correoElectronico = generarCorreoElectronico(nombre, apellido);
     Editorial.editores.add(this);
    }
+
    @Override
    public String generarCorreoElectronico(String nombre, String apellido){
       String nombreUsuario = nombre.toLowerCase() + "." + apellido.toLowerCase();
@@ -21,14 +23,20 @@ public class Editor extends Usuario{
    @Override
    public void decidirSobreArticulo(){
     Scanner sc = new Scanner(System.in);
+    System.out.println("Ingrese nombre del Journal: ");
+    String nombreJournal = sc.nextLine();
     System.out.print("Ingrese el codigo del artículo: ");
     String codigoIngresado = sc.nextLine();
+    
     for(Revision revision : Editorial.revisiones){
       if(revision.getArticulo().getCodigoArti().equals(codigoIngresado)){
-        System.out.println(revision.toString());
+        this.nombreJournal = nombreJournal;
         setRevision(revision);
+        setEstadoArticulo(EstadoArticulo.EN_REVISION);
         System.out.println("------------------------------------ ");
         tomarDecision(revision);
+        //revision.toString(); // mostrar datos de la revision
+        break;
       }
     }
     sc.close();
@@ -60,12 +68,16 @@ public class Editor extends Usuario{
     System.out.println("Tarea a realizar de: " + getNombre() + " " + getApellido());
     System.out.println("Registro de decisión final del artīculo"); 
     decidirSobreArticulo();
+    Editorial.escribirArchivo("revisiones.txt", toString());
     //notificar al autor sobre la decision final del articulo
   }
 
+  public String toString(){ //DEBE MOSTAR EL NOMBRE DEL ARTICULO, LA  DECISION FINAL, COMENTARIOS DE LOS REVISORES Y ENVIAR CORREO
+    return "Nombre del artículo: " + revision.getArticulo().getTitulo() + ", Decisión final: " + 
+    estadoArticulo + ", Comentarios de los revisores: " + revision.getComentarios();
+  }
 
-
-
+ 
   public String getNombreJournal(){
     return nombreJournal;
   }

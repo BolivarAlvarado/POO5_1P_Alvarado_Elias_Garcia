@@ -27,6 +27,7 @@ public void notificarAutor(Articulo articulo, EstadoArticulo decision){}
 
 public static void verificarRevision(Revisor revisor1, Revisor revisor2) {
   Revision revision1 = new Revision(revisor1);
+
   if(Editorial.revisiones.contains(revision1)){
     System.out.println("La revisión ya se encuentra en la lista de revisiones");
   }else{
@@ -42,6 +43,7 @@ public static void verificarRevision(Revisor revisor1, Revisor revisor2) {
     Editorial.revisiones.add(revision2);
   }
   System.out.println("Inicie sesión para proporcionar comentarios y tomar su decisión");
+  
   // boolean existeRevision = false;
 
   // for (Revision revision : Editorial.revisiones) {
@@ -111,7 +113,7 @@ public static void enviarCorreo(Revisor revisor){
 
   @Override
   public String toString(){
-    return "--------------------------\n" + "Artículo: " + articulo.getTitulo() + "Revisor: " + revisor.getNombre() + "Comentarios: "+comentarios + "Decision: " + decision;
+    return "--------------------------\n" + "Artículo: " + articulo.getTitulo() + ", Revisor: " + revisor.getNombre() + ", Comentarios: "+comentarios + ", Decision: " + decision;
 
   }
   
