@@ -12,7 +12,7 @@ public class Autor{
     private ArrayList<Articulo> articulos;
 private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-  private String generarCodigoAutor(){
+  private static String generarCodigoAutor(){
     Random rd = new Random();
     StringBuilder codigo = new StringBuilder(5);
     for(int i = 0; i< 5;i++){

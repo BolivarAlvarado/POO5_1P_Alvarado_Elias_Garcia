@@ -11,7 +11,43 @@ public class Editorial {
     public static ArrayList<Revision> revisiones = new ArrayList<>();
     public static void main(String[] args) {
         // Crear editor, revisor a partir del archivo de usuarios
+        cargarUsuarios();
+        usuarios.forEach(u -> System.out.println("Usuario: " + u.getUser() + ", Nombre: " + u.getNombre()));
+        //Mostrar las opciones 
         mostrarMenu();
+    }
+
+    public static void cargarUsuarios() {
+        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                
+                if (datos.length >= 5) { // Verificar que haya suficientes elementos en la línea
+                    String rolUsuario = datos[0];
+                    String user = datos[3];
+                    String password = datos[4];
+                    String nombre = datos[1];
+                    String apellido = datos[2];
+
+                    switch (rolUsuario) {
+                        case "EDITOR":
+                            // Crear y agregar editor a la lista de usuarios
+                            usuarios.add(new Editor(user, password, nombre, apellido));
+                            break;
+                        case "REVISOR":
+                            // Crear y agregar revisor a la lista de usuarios
+                            usuarios.add(new Revisor(user, password, nombre, apellido));
+                            break;
+                        default:
+                            System.out.println("Tipo de usuario no permitido: " + rolUsuario);
+                            break;
+                    }
+                } 
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //metodo para iniciar Sesión
@@ -25,14 +61,14 @@ public class Editorial {
             if(usuario.getPassword().equals(contraV) && usuario.getUser().equals(userV)){ // Comprueba si el usuario, cotraseña ingresado esta en las lista de usuarios
                 comprobarUsuario = true;
                 System.out.println("Bienvenido.... "); // mensaje de bienvenida
-                if (usuario.getRol() == RolUsuario.REVISOR){
+                if (usuario instanceof Revisor){
                     Revisor revisor = (Revisor) usuario;
                     System.out.println("Tarea a realizar de: " + revisor.getNombre() + " " + revisor.getApellido());
                     System.out.println("Revisión de artículo");
                     revisor.proporcionarComentarios();
                     revisor.decidirSobreArticulo();
                     //proporcionar comentarios y una decision
-                }else if(usuario.getRol() == RolUsuario.EDITOR){
+                }else if(usuario instanceof Editor){
                     Editor editor = (Editor) usuario;
                     System.out.println("Tarea a realizar de: " + editor.getNombre() + " " + editor.getApellido());
                     System.out.println("Registro de decisión final del artīculo"); 

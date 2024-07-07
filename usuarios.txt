@@ -1,0 +1,9 @@
+EDITOR,Juan,Caicedo,janesmith,adminpass
+REVISOR,Valeria,Brown,bobbrown,reviewpass
+EDITOR,Bolivar,Alvarado,janesmith,adminpass
+REVISOR,Andres,Moran,bobbrown,reviewpass
+EDITOR,Jeremy,Dorado,janesmith,adminpass
+REVISOR,Maria,Noboa,bobbrown,reviewpass
+EDITOR,Derlis,Gonzales,janesmith,adminpass
+REVISOR,Isaac,Benitez,bobbrown,reviewpass
+

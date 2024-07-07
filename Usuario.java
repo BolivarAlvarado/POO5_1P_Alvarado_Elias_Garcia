@@ -6,15 +6,14 @@ abstract class Usuario {
     protected String correoElectronico;
     protected RolUsuario rol;
 
-    public abstract void generarCorreoElectronico(); 
+    public abstract String generarCorreoElectronico(String nombre, String apellido); 
     public abstract void decidirSobreArticulo();
 
-    public Usuario(String user, String password, String nombre, String apellido, String correoElectronico,RolUsuario rol){
+    public Usuario(String user, String password, String nombre, String apellido,RolUsuario rol){
         this.user = user;
         this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.correoElectronico = correoElectronico;
         this.rol = rol;
     }
 
@@ -29,7 +28,7 @@ abstract class Usuario {
     public String getCorreoElectronico(){
         return correoElectronico;
     }
-    
+
     public String getUser(){
         return user;
     }

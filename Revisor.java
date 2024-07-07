@@ -5,16 +5,19 @@ public class Revisor extends Usuario{
   private int numArtRe;
   private Articulo articulo;
   private Decision decisionRevisor;
-  public Revisor(String user, String password,String nombre,String apellido, String correoElectronico,String especialidad,int numArtRe){
-    super(user,password,nombre,apellido,correoElectronico,RolUsuario.REVISOR);
-    this.especialidad=especialidad;
-    this.numArtRe = numArtRe;
+  
+  public Revisor(String user, String password,String nombre,String apellido){
+    super(user,password,nombre,apellido,RolUsuario.REVISOR);
+    this.correoElectronico = generarCorreoElectronico(nombre, apellido);
     this.decisionRevisor = Decision.PENDIENTE;
     Editorial.revisores.add(this);
   }
 
   @Override
-  public void generarCorreoElectronico(){} 
+  public String generarCorreoElectronico(String nombre, String apellido){
+    String nombreUsuario = nombre.toLowerCase() + "." + apellido.toLowerCase();
+    return nombreUsuario + "@gmail.com"; 
+  } 
 
 
 
@@ -37,6 +40,8 @@ public class Revisor extends Usuario{
       System.out.println("Opcion invalida");
         break;
     }
+    sc.close();
+    this.numArtRe++;
   }
 
     public void proporcionarComentarios(){
@@ -51,6 +56,7 @@ public class Revisor extends Usuario{
           revision.agregarComentario(comentario);
       }
     }
+    sc.close();
   }
 
 

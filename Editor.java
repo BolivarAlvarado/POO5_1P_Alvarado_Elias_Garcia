@@ -1,18 +1,20 @@
 import java.util.Scanner;
 public class Editor extends Usuario{
    private String nombreJournal;
-   private String codigoArticulo;
+   private Revision revision;
    private EstadoArticulo estadoArticulo;
 
 
-  public Editor(String user, String password, String nombre, String apellido, String correoElectronico,String codigoArticulo, EstadoArticulo estadoArticulo){
-    super(user,password,nombre,apellido,correoElectronico,RolUsuario.EDITOR);
-    this.codigoArticulo = codigoArticulo;
-    this.estadoArticulo = estadoArticulo;
+  public Editor(String user, String password, String nombre, String apellido){
+    super(user,password,nombre,apellido,RolUsuario.EDITOR);
+    this.correoElectronico = generarCorreoElectronico(nombre, apellido);
     Editorial.editores.add(this);
    }
    @Override
-   public void generarCorreoElectronico(){}
+   public String generarCorreoElectronico(String nombre, String apellido){
+      String nombreUsuario = nombre.toLowerCase() + "." + apellido.toLowerCase();
+      return nombreUsuario + "@gmail.com";
+   }
 
 
 
@@ -24,10 +26,12 @@ public class Editor extends Usuario{
     for(Revision revision : Editorial.revisiones){
       if(revision.getArticulo().getCodigoArti().equals(codigoIngresado)){
         System.out.println(revision.toString());
+        setRevision(revision);
         System.out.println("------------------------------------ ");
         tomarDecision(revision);
       }
     }
+    sc.close();
    }
 
    public void tomarDecision(Revision revision){
@@ -49,6 +53,7 @@ public class Editor extends Usuario{
       System.out.println("Opcion no valida");
         break;
     }
+    sc.close();
   }
 
 
@@ -60,8 +65,11 @@ public class Editor extends Usuario{
   public void setNombreJournal(String nombreJournal){
     this.nombreJournal=nombreJournal;
   }
-  public String getCodigoArticulo(){
-    return codigoArticulo;
+  public Revision getRevision(){
+    return revision;
+  }
+  public void setRevision(Revision revision){
+    this.revision = revision;
   }
   public EstadoArticulo getEstadoArticulo(){
     return estadoArticulo;

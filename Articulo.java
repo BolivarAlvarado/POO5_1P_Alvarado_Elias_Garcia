@@ -13,7 +13,7 @@ public class Articulo{
   private EstadoArticulo estado;
   private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-  private String generarCodigoArticulo(){
+  private static String generarCodigoArticulo(){
     Random rd = new Random();
     StringBuilder codigo = new StringBuilder(5);
     for(int i = 0; i< 5;i++){
@@ -74,7 +74,7 @@ public class Articulo{
     int r1 = rd.nextInt(Editorial.revisores.size());
     int r2;
     do{
-      r2 = rd.nextInt(Editorial.revisiones.size());
+      r2 = rd.nextInt(Editorial.revisores.size());
     } while(r2 == r1);
 
     Revisor revisor1 = Editorial.revisores.get(r1);

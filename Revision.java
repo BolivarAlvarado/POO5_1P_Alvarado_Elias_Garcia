@@ -105,6 +105,7 @@ public static void enviarCorreo(Revisor revisor){
       System.out.println("Opcion no valida");
         break;
     }
+    sc.close();
   }
 
 
