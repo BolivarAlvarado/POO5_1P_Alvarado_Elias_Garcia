@@ -18,7 +18,18 @@ abstract class Usuario {
         this.rol = rol;
     }
 
+    public String getNombre(){
+        return nombre;
+    }
 
+    public String getApellido(){
+        return apellido;
+    }
+
+    public String getCorreoElectronico(){
+        return correoElectronico;
+    }
+    
     public String getUser(){
         return user;
     }

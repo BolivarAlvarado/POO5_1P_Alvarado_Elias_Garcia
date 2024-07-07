@@ -1,6 +1,7 @@
 public class Revisor extends Usuario{
   private String especialidad;
   private int numArtRe;
+  private Articulo articulo;
 
   public Revisor(String user, String password,String nombre,String apellido, String correoElectronico,String especialidad,int numArtRe){
     super(user,password,nombre,apellido,correoElectronico,RolUsuario.REVISOR);
@@ -31,6 +32,14 @@ public class Revisor extends Usuario{
   }
   public void setNumArtRe(int numArtRe){
     this.numArtRe = numArtRe;
+  }
+
+  public Articulo getArticulo(){
+    return articulo;
+  }
+
+  public void setArticulo(Articulo articulo){
+    this.articulo = articulo;
   }
   
 }

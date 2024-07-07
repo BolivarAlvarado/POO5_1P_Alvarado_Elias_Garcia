@@ -65,7 +65,29 @@ public class Articulo{
   public void enviarArticuloARevision(){
     //Asignar a dos revisores de la lista de revisores
     //enviar correo indicando que se les ha asignado el articulo
-  } //
+    this.estado = EstadoArticulo.EN_REVISION;
+    asignarRevisores();
+  } 
+
+  private void asignarRevisores(){
+    Random rd = new Random();
+    int r1 = rd.nextInt(Editorial.revisores.size());
+    int r2;
+    do{
+      r2 = rd.nextInt(Editorial.revisiones.size());
+    } while(r2 == r1);
+
+    Revisor revisor1 = Editorial.revisores.get(r1);
+    Revisor revisor2 = Editorial.revisores.get(r2);
+
+    System.out.println("Revisores asignados al artículo: ");
+    System.out.println("Revisor 1: " + revisor1.getNombre() + revisor1.getApellido());
+    System.out.println("Revisor 2: " + revisor2.getNombre() + revisor1.getApellido());
+    
+    //METODO PARA ENVIAR CORREO
+  }
+
+
 
 
 

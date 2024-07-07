@@ -46,6 +46,23 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         String campoInvestigacion = sc.nextLine();
         return new Autor(nombre, apellido, correoElectronico, institucion, campoInvestigacion);
     }
+
+
+    // Gestion de someter articulo
+    public static void someterArticulo(Scanner sc){
+        Autor autor = Autor.ingresarDatosAutor(sc); 
+        Editorial.escribirArchivo("autores.txt", autor.toString()); // guarda los datos ingresados en su respectivo archivo
+        Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
+        autor.setArticulo(articulo);
+        Editorial.escribirArchivo("articulos.txt", articulo.toString());// guarda los datos ingresados en su respectivo archivo
+        System.out.println("Desea enviar el artículo a revisión 'S' , 'N': "); //SI : 'S' , NO : 'N'
+        String opc2 = sc.nextLine();
+        if (opc2.equalsIgnoreCase("S")){
+            articulo.enviarArticuloARevision(); // COMPLETAR ESTE METODO
+        }
+    }
+
+
     @Override
     public String toString(){
         return "-----------------------------\n"+
@@ -53,6 +70,7 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         ", Institución: "+ institucion + ", Campo de investigación: " + campoInvestigacion + ", Artículos: " + 
         articulos.toString();
     }
+
 
 
 

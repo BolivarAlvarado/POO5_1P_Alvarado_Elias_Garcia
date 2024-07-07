@@ -1,12 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.*;
 
 public class Editorial {
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
@@ -16,17 +10,8 @@ public class Editorial {
     public static ArrayList<Articulo> articulos = new ArrayList<>();
     public static ArrayList<Revision> revisiones = new ArrayList<>();
     public static void main(String[] args) {
-        //Al ejecutar la aplicación, se mostrarán las opciones de Someter Artículo e Iniciar Sesión
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Opciones 'S' O 'I': "); //Someter articulo 'S', Iniciar Sesion 'I'
-        String opc = sc.nextLine();
-        if(opc.equalsIgnoreCase("S")){
-            someterArticulo(sc);
-            //asignar automaticamente a dos revisores  de la lista de revisores
-        }else{
-            iniciarSesion(sc);
-        }
-        sc.close();
+        // Crear editor, revisor a partir del archivo de usuarios
+        mostrarMenu();
     }
 
     //metodo para iniciar Sesión
@@ -35,44 +20,84 @@ public class Editorial {
         String userV = sc.nextLine();
         System.out.println("Ingrese su contraseña: ");
         String contraV = sc.nextLine();
+        boolean comprobarUsuario = false;
         for(Usuario usuario: usuarios){
             if(usuario.getPassword().equals(contraV) && usuario.getUser().equals(userV)){ // Comprueba si el usuario, cotraseña ingresado esta en las lista de usuarios
+                comprobarUsuario = true;
                 System.out.println("Bienvenido.... "); // mensaje de bienvenida
                 // Mostrar su tarea a realizar dependiendo del tipo de usuario
                 if (usuario instanceof Revisor){
+                    System.out.println("Tarea a realizar de: " + usuario.getNombre());
+                    Revisor revisor = (Revisor) usuario;
                     System.out.println("Revisión de artículo");
+                    //Agregar lo demas
                 }else if(usuario instanceof Editor){
+                    System.out.println("Tarea a realizar de: " + usuario.getNombre()); 
+                    Editor editor = (Editor) usuario;
                     System.out.println("Registro de decisión final del artīculo"); 
+                    //Agregar lo demas
                 }
-                return;
+                break;
             } 
         }
-        System.out.println("Usuario o contraseña incorrectos...");
-    }
-
-// Gestion de someter articulo
-    public static void someterArticulo(Scanner sc){
-        Autor autor = Autor.ingresarDatosAutor(sc); 
-        escribirArchivo("autores.txt", autor.toString()); // guarda los datos ingresados en su respectivo archivo
-        Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
-        autor.setArticulo(articulo);
-        escribirArchivo("articulos.txt", articulo.toString());// guarda los datos ingresados en su respectivo archivo
-        System.out.println("Desea enviar el artículo a revisión 'S' , 'N': "); //SI : 'S' , NO : 'N'
-        String opc2 = sc.nextLine();
-        if (opc2.equalsIgnoreCase("S")){
-            articulo.enviarArticuloARevision(); // COMPLETAR ESTE METODO
+        if(!comprobarUsuario){
+            System.out.println("Usuario o contraseña incorrectos...");
         }
     }
 
 
-//Gestion de revision
-//Asignar automaticamente a dos revisores de la lista de revisores
-//Enviar un correo a los revisores indicando que se les ha asignado un articulo(en el contenido del mail incluir a los datos del articulo)
+    public static void mostrarMenu(){
+        //Al ejecutar la aplicación, se mostrarán las opciones de Someter Artículo e Iniciar Sesión
+        Scanner sc = new Scanner(System.in);
+        int op = 0;
+        do{
+            System.out.println("Seleccione una opcion: ");
+            System.out.println("0. Someter Articulo");
+            System.out.println("1. Iniciar Sesion");
+            System.out.println("2. Salir");
+            op = sc.nextInt();
+            sc.nextLine();
+            switch (op) {
+                case 0:
+                    System.out.println("Ha escogido la opcion de someter articulo");
+                    Autor.someterArticulo(sc);
+                    //asignar automaticamente a dos revisores  de la lista de revisores
+                    break;
+                case 1:
+                    System.out.println("Ha escogido la opcion de Iniciar Sesion");
+                    iniciarSesion(sc);
+                    break;
+                case 2:
+                    System.out.println("Salir");
+                    break;
+                default:
+                System.out.println("Opcion no valida");
+                    break;
+            }
+ 
+        }while(op!=2);
+        sc.close();
 
+    }
 
-public void notificarAutor(Articulo articulo, EstadoArticulo decision){}
-
-public void proporcionarComentarios(){}
+    public void verificarRevision(Articulo articulo, Revisor revisor) {
+        boolean existeRevision = false;
+    
+        for (Revision revision : revisiones) {
+            if (revision.getArticulo().getCodigoArti().equals(articulo.getCodigoArti())) {
+                // Proporcionar comentarios y tomar decisión
+                revision.proporcionarComentarios();
+                revision.tomarDecision();
+                escribirArchivo("revisiones.txt", revision.toString());
+                existeRevision = true;
+            }
+        }
+    
+        if (!existeRevision) {
+            // Si no hay revisión existente, asignar revisores al artículo
+            articulo.enviarArticuloARevision();
+        }
+    }
 
 
 
