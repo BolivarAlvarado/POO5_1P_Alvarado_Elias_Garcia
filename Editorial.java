@@ -1,6 +1,11 @@
+package emailsender;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+
 
 public class Editorial {
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
@@ -11,14 +16,14 @@ public class Editorial {
     public static ArrayList<Revision> revisiones = new ArrayList<>();
     public static void main(String[] args) {
         // Crear editor, revisor a partir del archivo de usuarios
-        cargarUsuarios();
+        //cargarUsuarios();
         usuarios.forEach(u -> System.out.println("Usuario: " + u.getUser() + ", Contraseña: " + u.getPassword()+", ROL: " + u.getRol() ));
         //Mostrar las opciones 
         mostrarMenu();
     }
 
     public static void cargarUsuarios() {
-        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("D:\\usuarios.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
@@ -54,8 +59,9 @@ public class Editorial {
         }
     }
     public static void mostrarUsuariosAsignados(){
-        for(Revisor revisor : Editorial.revisores){
+        for(Revisor revisor : revisores){
             if(revisor.getArticulo() != null){
+
                 System.out.println("Usuario: "+revisor.getUser() + ", Contraseña: "+revisor.getPassword() + ", Artículo asignado: "+revisor.getArticulo().getTitulo());
             }
         }
@@ -97,9 +103,7 @@ public class Editorial {
         do{
             System.out.println("1. Someter Articulo");
             System.out.println("2. Iniciar Sesion");
-            //System.out.println("3. Mostar Usuarios");
-            //System.out.println("4. Mostrar revisores asignados");
-            System.out.println("5.. Salir");
+            System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
             op = sc.nextInt();
             sc.nextLine();
@@ -113,19 +117,14 @@ public class Editorial {
                     System.out.println("Ha escogido la opcion de Iniciar Sesión");
                     iniciarSesion(sc);
                     break;
-                // case 3:
-                //         cargarUsuarios(); // VER COMO IMPLEMENTAR CORRECTAMENTE
-                //     break;
-                // case 4:
-                //     mostrarUsuariosAsignados();
-                case 5:
+                case 3:
                     System.out.println("Salir");
                     break;
                 default:
                 System.out.println("Opcion invalida");
                     break;
             }
-        }while(op!=5);
+        }while(op!=3);
         sc.close();
 
     }
