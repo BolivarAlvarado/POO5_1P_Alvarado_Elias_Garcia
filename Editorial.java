@@ -1,5 +1,6 @@
 package emailsender;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.io.*;
 import java.util.Properties;
@@ -7,20 +8,85 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 
-public class Editorial {
+public class Editorial{
+    private static String emailFromString="edgarcia20033@gmail.com";
+    private static String passString="MegMente123";
+
+
+    private Properties props;
+
+
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
     public static ArrayList<Revisor> revisores = new ArrayList<>();
     public static ArrayList<Autor> autores = new ArrayList<>();
     public static ArrayList<Editor> editores = new ArrayList<>();
     public static ArrayList<Articulo> articulos = new ArrayList<>();
     public static ArrayList<Revision> revisiones = new ArrayList<>();
+    
+    public Editorial(){
+        
+        props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+    }
+    
+
+    public void enviarCorreo(String asunto, String contenido, String archivoUsuarios) {
+        // Obtener la sesión
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(emailFromString, passString);
+            }
+        });
+         try {
+            // Leer destinatarios del archivo usuarios.txt
+              if (revisores.isEmpty()) {
+                System.out.println("No hay destinatarios en el archivo " + archivoUsuarios);
+                return;
+            }
+
+            // Crear el mensaje de correo
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(emailFromString));
+
+            // Añadir destinatarios
+            for (Revisor destinatario : revisores) {
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario.getCorreoElectronico()));
+            }
+
+            message.setSubject(asunto);
+            message.setText(contenido);
+
+            // Enviar el correo
+            Transport.send(message);
+
+            System.out.println("Correo enviado exitosamente");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+   
+
+
     public static void main(String[] args) {
         // Crear editor, revisor a partir del archivo de usuarios
         //cargarUsuarios();
         usuarios.forEach(u -> System.out.println("Usuario: " + u.getUser() + ", Contraseña: " + u.getPassword()+", ROL: " + u.getRol() ));
         //Mostrar las opciones 
         mostrarMenu();
+        Editorial editorial = new Editorial();
+        String asunto = "Asunto del correo";
+        String contenido = "Contenido del correo";
+        String archivoUsuarios = "usuarios.txt";
+        
+        editorial.enviarCorreo(asunto, contenido, archivoUsuarios);
     }
+    
+
+        
 
     public static void cargarUsuarios() {
         try (BufferedReader br = new BufferedReader(new FileReader("D:\\usuarios.txt"))) {
@@ -66,6 +132,8 @@ public class Editorial {
             }
         }
     }
+
+   
 
     //metodo para iniciar Sesión
     public static void iniciarSesion(Scanner sc){
