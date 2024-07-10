@@ -34,6 +34,7 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 
     public static Autor ingresarDatosAutor(Scanner sc){
+        System.out.println("Antes de someter un artículo, debe registrar sus datos en la aplicación");
         System.out.print("Ingrese su nombre: ");
         String nombre = sc.nextLine();
         System.out.print("Ingrese su apellido: ");
@@ -50,40 +51,45 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     // Gestion de someter articulo
     public static void someterArticulo(Scanner sc){
-        Autor autor = Autor.ingresarDatosAutor(sc); 
+        Autor autor = ingresarDatosAutor(sc); 
         Editorial.escribirArchivo("autores.txt", autor.toString()); // guarda los datos ingresados en su respectivo archivo
 
         Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
         autor.setArticulo(articulo);
         articulo.setAutor(autor);
-
         Editorial.escribirArchivo("articulos.txt",articulo.toString());// guarda los datos ingresados en su respectivo archivo
+
         System.out.println("---------------------------------------");
-        System.out.println("Iniciar Gestion de Revisión?"); 
-        System.out.println("Pulse 1 si desea continuar, caso contrario puse cualquier otro número:");
+        System.out.println("Iniciar Gestión de Revisión?"); 
+        System.out.println("Pulse 1 si desea continuar, caso contrario pulse cualquier otro número");
         System.out.print("Ingresar opción: ");
         int opc = sc.nextInt();
         sc.nextLine();
 
         if (opc == 1){
             articulo.enviarArticuloARevision(); 
+        }else{
+            System.out.println("Volviendo al menú...");
         }
     }
 
 
     @Override
     public String toString(){
-        return "-----------------------------\n"+
-        "Nombre: " + nombre + ", Apellido: " + apellido + ", Código: " + codigoAutor +", Correo Electrónico: " + correoElectronico + 
-        ", Institución: "+ institucion + ", Campo de investigación: " + campoInvestigacion + ", Artículos: " + 
-        articulos.toString();
+        return "Nombre: " + nombre  +
+         ", Apellido: " + apellido + 
+         ", Código: " + codigoAutor + 
+         ", Correo Electrónico: " + correoElectronico + 
+        ", Institución: "+ institucion + 
+        ", Campo de investigación: " + campoInvestigacion + 
+        ", Artículos: " + articulos.toString();
     }
 
 
 
 
 
-
+    //getters, setters
     public String getNombre(){
         return nombre;
     }

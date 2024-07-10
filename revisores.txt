@@ -1,9 +1,0 @@
-Nombre: Isaac, Apellido: Benitez, Especialidad: estudiante, Artículo: titulo, Decisión: ACEPTADO, Artículos revisados: 1
-Nombre: Isaac, Apellido: Benitez, Especialidad: especialidad, Artículo: titulo, Decisión: ACEPTADO, Artículos revisados: 2
-Nombre: Valeria, Apellido: Brown, Especialidad: estudiante, Artículo: titulo, Decisión: ACEPTADO, Artículos revisados: 1
-Nombre: Valeria, Apellido: Brown, Especialidad: estudiante, Artículo: titulo, Decisión: ACEPTADO, Artículos revisados: 2
-Nombre: Valeria, Apellido: Brown, Especialidad: estudiante, Artículo: titulo, Decisión: ACEPTADO, Artículos revisados: 1
-Nombre: Valeria, Apellido: Brown, Especialidad: estudiante, Artículo: titulo, Decisión: ACEPTADO, Artículos revisados: 2
-Nombre: Valeria, Apellido: Brown, Especialidad: estudiante, Artículo: titulo, Decisión: ACEPTADO, Artículos revisados: 1
-Nombre: Maria, Apellido: Noboa, Especialidad: estudiante, Artículo: titulo, Decisión: ACEPTADO, Artículos revisados: 1
-Nombre: Maria, Apellido: Noboa, Especialidad: estudiante, Artículo: titulo, Decisión: ACEPTADO, Artículos revisados: 1

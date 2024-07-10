@@ -21,13 +21,12 @@ public class Editor extends Usuario{
 
 
    @Override
-   public void decidirSobreArticulo(){
+   public void decidirSobreArticulo(String codigoIngresado){
     Scanner sc = new Scanner(System.in);
     System.out.println("Ingrese nombre del Journal: ");
     String nombreJournal = sc.nextLine();
-    System.out.print("Ingrese el codigo del artículo: ");
-    String codigoIngresado = sc.nextLine();
-    
+
+
     for(Revision revision : Editorial.revisiones){
       if(revision.getArticulo().getCodigoArti().equals(codigoIngresado)){
         this.nombreJournal = nombreJournal;
@@ -40,6 +39,7 @@ public class Editor extends Usuario{
         System.out.println("Codigo no encontrado...");
       }
     }
+    sc.close();
    }
 
    public void tomarDecision(Revision revision){
@@ -52,10 +52,10 @@ public class Editor extends Usuario{
     sc.nextLine();
     switch (decision) {
       case 1:
-        estadoArticulo = EstadoArticulo.PUBLICADO;
+        setEstadoArticulo(EstadoArticulo.PUBLICADO);
         break;
       case 2:
-        estadoArticulo = EstadoArticulo.RECHAZADO;
+        setEstadoArticulo(EstadoArticulo.RECHAZADO);
         break;
       default:
       System.out.println("Opción no válida");
@@ -64,17 +64,21 @@ public class Editor extends Usuario{
     sc.close();
   }
 
-  public void mostarTareaRealizar(){
+  public void mostarTareaRealizar(Scanner sc){
     System.out.println("Tarea a realizar de: " + getNombre() + " " + getApellido());
-    System.out.println("Registro de decisión final del artīculo"); 
-    decidirSobreArticulo();
+    System.out.println("Registro de decisión final del artículo"); 
+    System.out.print("Ingrese el codigo del artículo: ");
+    String codigoIngresado = sc.nextLine();
+    decidirSobreArticulo(codigoIngresado);
     Editorial.escribirArchivo("revisiones.txt", toString());
     //notificar al autor sobre la decision final del articulo
   }
-
+  
+  @Override
   public String toString(){ //DEBE MOSTAR EL NOMBRE DEL ARTICULO, LA  DECISION FINAL, COMENTARIOS DE LOS REVISORES Y ENVIAR CORREO
-    return "Nombre del artículo: " + revision.getArticulo().getTitulo() + ", Decisión final: " + 
-    estadoArticulo + ", Comentarios de los revisores: " + revision.getComentarios();
+    return "Nombre del artículo: " + revision.getArticulo().getTitulo() +
+     ", Decisión final: " + estadoArticulo +
+      ", Comentarios de los revisores: " + revision.getComentarios();
   }
 
  

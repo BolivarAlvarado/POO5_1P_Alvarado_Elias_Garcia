@@ -7,7 +7,7 @@ abstract class Usuario {
     protected RolUsuario rol;
 
     public abstract String generarCorreoElectronico(String nombre, String apellido); 
-    public abstract void decidirSobreArticulo();
+    public abstract void decidirSobreArticulo(String nombreArticulo);
 
     public Usuario(String user, String password, String nombre, String apellido,RolUsuario rol){
         this.user = user;

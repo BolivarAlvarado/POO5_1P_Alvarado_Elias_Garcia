@@ -1,2 +1,1 @@
-Autor: bolivar alvarado, Título: tituloCódigo: 9J8HB, Contenido: contenido, Palabras Claves: [fdsf, sdf], Estado artículo: INGRESADO, Resumen: resumen
-Autor: bolivar alvarado, Título: tituloCódigo: Q6BBE, Contenido: contenido, Palabras Claves: [p1, p2], Estado artículo: INGRESADO, Resumen: resumen
+Autor: bolivar alvarado, Título: handbook, Código: 1V37Z, Contenido: contenido, Palabras Claves: [palabra1, palabra2], Estado artículo: INGRESADO, Resumen: resumen

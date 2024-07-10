@@ -1,9 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Revisor extends Usuario{
   private String especialidad;
   private int numArtRe;
-  private Articulo articulo;
+  private ArrayList<String> articulosRevisor = new ArrayList<>();
   private Decision decisionRevisor;
   
   public Revisor(String user, String password,String nombre,String apellido){
@@ -23,62 +24,87 @@ public class Revisor extends Usuario{
 
 
   @Override
-  public void decidirSobreArticulo(){//ver si se pasa articulo como parametro
-    Scanner sc = new Scanner(System.in);
-    System.out.print("Ingrese su especialidad: ");
-    String especialidad = sc.nextLine();
-    System.out.println("Tomar decisión sobre el articulo: " + articulo.getTitulo());
-    System.out.println("1. ACEPTAR");
-    System.out.println("2. RECHAZAR");
-    int opc = sc.nextInt();
-    sc.nextLine();
-    switch (opc) {
-      case 1:
-        this.decisionRevisor = Decision.ACEPTADO;
-        this.especialidad = especialidad;
-        this.numArtRe++;
-        Editorial.escribirArchivo("revisores.txt", toString());
-        System.out.println("Volviendo al menú....");
-        break;
-      case 2:
-        this.decisionRevisor = Decision.RECHAZADO;
-        this.especialidad = especialidad;
-        this.numArtRe++;
-        Editorial.escribirArchivo("revisores.txt", toString());
-        System.out.println("Volviendo al menú....");
-        break;
-      default:
-      System.out.println("Opcion invalida");
-        break;
-    }
-  }
-
-    public void proporcionarComentarios(){
-    Scanner sc = new Scanner(System.in);
-    System.out.print("Ingrese el titulo del artículo del cual desea proporcionar comentarios: ");
-    String nombreArticulo = sc.nextLine();
-    for(Revision revision : Editorial.revisiones){
-      if(revision.getArticulo().getTitulo().equals(nombreArticulo)){
-          System.out.println("Revisor: " + this.getNombre() + " " + this.getApellido());
-          System.out.println("Ingrese los comentarios del artículo: " + revision.getArticulo().getTitulo() );
-          String comentario = sc.nextLine();
-          revision.agregarComentario(comentario);
-          break;
+  public void decidirSobreArticulo(String nombreArticulo){
+    if (nombreArticulo.equals(" ")){
+      System.out.println("Error");
+    }else{
+      try (Scanner sc = new Scanner(System.in)) {
+        System.out.print("Ingrese su especialidad: ");
+        String especialidad = sc.nextLine();
+        System.out.println("Tomar decisión sobre el articulo: " + nombreArticulo);
+        System.out.println("1. ACEPTAR");
+        System.out.println("2. RECHAZAR");
+        int opc = sc.nextInt();
+        sc.nextLine();
+        switch (opc) {
+          case 1:
+            setDecisionRevisor(Decision.ACEPTADO);
+            setEspecialidad(especialidad);
+            masNumArtRe();;
+            Editorial.escribirArchivo("revisores.txt", toString());
+            System.out.println("Volviendo al menú....");
+            break;
+          case 2:
+            setDecisionRevisor(Decision.RECHAZADO);
+            setEspecialidad(especialidad);
+            masNumArtRe();
+            Editorial.escribirArchivo("revisores.txt", toString());
+            System.out.println("Volviendo al menú....");
+            break;
+          default:
+          System.out.println("Opcion inválida");
+            break;
+        }
       }
     }
+
   }
 
+    public String proporcionarComentarios(){
+      try (Scanner sc = new Scanner(System.in)) {
+      System.out.println("Estos son los artículos que se le ha asignado");
+      for (String articulo : articulosRevisor){
+        System.out.println(" * " + articulo);
+      }
+      System.out.println("----------------------------------------------");
+      System.out.print("Ingrese el titulo del artículo del cual desea proporcionar comentarios: ");
+      String nombreArticulo = sc.nextLine();
+      for(String articulo : articulosRevisor){
+        if(articulo.equals(nombreArticulo)){
+          System.out.println("Ingrese los comentarios del artículo: ");
+          String comentario = sc.nextLine();
+          for(Revision revision: Editorial.revisiones){
+            if(revision.getArticulo().getTitulo().equals(nombreArticulo)){
+              System.out.println("Comentarios agregados a la revisión");
+              revision.agregarComentario(comentario);
+            }
+          }
+          return nombreArticulo;
+        }
+      }
+      return " ";
+    }
+  }
+
+
   public void mostrarTareaRealizar(){
-    System.out.println("Tarea a realizar de: " + getNombre() + " " + getApellido());
-    System.out.println("Revisión de artículo");
-    proporcionarComentarios();
-    decidirSobreArticulo();
-    //proporcionar comentarios y una decision
+    System.out.println("Tarea encargada: Revisión de artículo");
+    System.out.println("----------------------------------------------");
+    if(Editorial.articulos.equals(null)){
+      System.out.println("No se han ingresado artículos");
+    }else{
+      String nombreArticulo = proporcionarComentarios();
+      decidirSobreArticulo(nombreArticulo);
+    }
   }
 
   public String toString(){
-    return "Nombre: " + nombre + ", Apellido: " + apellido + ", Especialidad: " + especialidad + ", Artículo: "
-    + articulo.getTitulo() + ", Decisión: " + decisionRevisor + ", Artículos revisados: " + numArtRe;
+    return "Nombre: " + nombre +
+     ", Apellido: " + apellido + 
+     ", Especialidad: " + especialidad + 
+     ", Artículo: " + articulosRevisor.toString() + 
+     ", Decisión: " + decisionRevisor + 
+     ", Artículos revisados: " + numArtRe;
   }
 
 
@@ -93,16 +119,26 @@ public class Revisor extends Usuario{
   public int getNumArtRe(){
     return numArtRe;
   }
-  public void setNumArtRe(int numArtRe){
-    this.numArtRe = numArtRe;
+  public void masNumArtRe(){
+    this.numArtRe++;
   }
 
-  public Articulo getArticulo(){
-    return articulo;
+  public void setDecisionRevisor(Decision decision){
+    this.decisionRevisor = decision;
   }
 
-  public void setArticulo(Articulo articulo){
-    this.articulo = articulo;
+  public Decision getDecisionRevisor(){
+    return decisionRevisor;
+  }
+
+
+
+  public ArrayList<String> getArticulosRevisor(){
+    return articulosRevisor;
+  }
+
+  public void setArticulo(String articulo){
+    articulosRevisor.add(articulo);
   }
   
 }

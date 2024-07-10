@@ -8,9 +8,9 @@ public class Revision{
   private ArrayList<String> comentarios; // comentarios del revisor
   private Decision decision; // decisiion del articulo
 
-  public Revision(Revisor revisor){
+  public Revision(Revisor revisor, Articulo articulo){
     this.revisor = revisor;
-    this.articulo = revisor.getArticulo();
+    this.articulo = articulo;
     this.comentarios = new ArrayList<>();
     this.decision = null;
     Editorial.revisiones.add(this);
@@ -24,52 +24,39 @@ public class Revision{
 
 public void notificarAutor(Articulo articulo, EstadoArticulo decision){}
 
+    // public boolean equals(Object obj){ // ver donde usar, implementarlo con equlas
+    //     if( this == obj){
+    //         return true;
+    //     }if( obj == null){
+    //         return false;
+    //     }if( getClass() != obj.getClass()){
+    //         return false;
+    //     }
+    //     Articulo articulo = (Articulo) obj;
+    //     if(!this.equals(revision.getArticulo())){
+    //       return false;
+    //     }
+    //     return true;
+    //   }
 
-public static void verificarRevision(Revisor revisor1, Revisor revisor2) {
-  Revision revision1 = new Revision(revisor1);
-
-  if(Editorial.revisiones.contains(revision1)){
-    //System.out.println("La revisión ya se encuentra en la lista de revisiones");
-  }else{
-    System.out.println("Revisión del artículo: " + revision1.getArticulo().getTitulo() + "agregada");
-    Editorial.revisiones.add(revision1);
-  }
-
-  Revision revision2 = new Revision(revisor2);
-  if(Editorial.revisiones.contains(revision2)){
+public static void agregarRevision(Revisor revisor1, Revisor revisor2, Articulo articulo){
+  Revision revision1 = new Revision(revisor1, articulo);
+  Revision revision2 = new Revision(revisor2, articulo);
+  if(Editorial.revisiones.contains(revision1) || Editorial.revisiones.contains(revision2)){
     System.out.println("La revisión ya se encuentra en la lista de revisiones");
-  }else{
-    System.out.println("Revisión del artículo: " + revision2.getArticulo().getTitulo() + "agregada");
-    Editorial.revisiones.add(revision2);
   }
   System.out.println("Inicie sesión para proporcionar comentarios y tomar su decisión");
-  System.out.println("-------------------------------------------");
-  
-  // boolean existeRevision = false;
-
-  // for (Revision revision : Editorial.revisiones) {
-  //     if (revision.getArticulo().getCodigoArti().equals(articulo.getCodigoArti())) {
-  //         // Proporcionar comentarios y tomar decisión
-  //         revision.proporcionarComentarios();
-  //         revision.tomarDecision();
-  //         Editorial.escribirArchivo("revisiones.txt", revision.toString());
-  //         existeRevision = true;
-  //     }
-  // }
-
-  // if (!existeRevision) {
-  //     articulo.enviarArticuloARevision();
-  // }
-
-}
+  System.out.println("Volviendo al menú...");
+  }
 
 
-public static void enviarCorreo(Revisor revisor){
-  System.out.println(revisor.getNombre() + revisor.getApellido() + " se le ha asignado la revision del artículo: " + revisor.getArticulo().getTitulo());
-  System.out.println("Datos del Artículo: \n" + "Titulo: "+revisor.getArticulo().getTitulo() + 
-  "\n" + "Autor: "+revisor.getArticulo().getAutor() + "\n" + "Contenido" + "\n" + 
-  revisor.getArticulo().getContenido()+"\n"  +"Resumen"+ "\n"  + revisor.getArticulo().getResumen());
-  
+
+public static void enviarCorreo(Revisor revisor){ 
+  // revisor.getNombre() + " "+revisor.getApellido() + " se le ha asignado la revision del artículo: " + revisor.getArticulo().getTitulo() +
+  // "Datos del Artículo: \n" + "Titulo: "+revisor.getArticulo().getTitulo() + 
+  // "\n" + "Autor: "+revisor.getArticulo().getAutor() + "\n" + "Contenido" + "\n" + 
+  // revisor.getArticulo().getContenido()+"\n"  +"Resumen"+ "\n"  + revisor.getArticulo().getResumen();
+
 }
 //los revisores deben ingresar a la aplicacion para proporcionar comentarios y tomar decision
 //Los cometarios y la decision de los revisores deben almacenarse en el archivo correspondiente

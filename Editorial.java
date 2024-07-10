@@ -1,19 +1,19 @@
-package emailsender;
+//package emailsender;
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 import java.util.Scanner;
 import java.io.*;
-import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.*;
+//import java.util.Properties;
+//import javax.mail.*;
+//import javax.mail.internet.*;
 
 
 public class Editorial{
-    private static String emailFromString="edgarcia20033@gmail.com";
-    private static String passString="MegMente123";
+    //private static String emailFromString="edgarcia20033@gmail.com";
+   // private static String passString="MegMente123";
 
 
-    private Properties props;
+    //private Properties props;
 
 
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
@@ -23,73 +23,109 @@ public class Editorial{
     public static ArrayList<Articulo> articulos = new ArrayList<>();
     public static ArrayList<Revision> revisiones = new ArrayList<>();
     
-    public Editorial(){
-        
-        props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-    }
-    
-
-    public void enviarCorreo(String asunto, String contenido, String archivoUsuarios) {
-        // Obtener la sesión
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(emailFromString, passString);
-            }
-        });
-         try {
-            // Leer destinatarios del archivo usuarios.txt
-              if (revisores.isEmpty()) {
-                System.out.println("No hay destinatarios en el archivo " + archivoUsuarios);
-                return;
-            }
-
-            // Crear el mensaje de correo
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(emailFromString));
-
-            // Añadir destinatarios
-            for (Revisor destinatario : revisores) {
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario.getCorreoElectronico()));
-            }
-
-            message.setSubject(asunto);
-            message.setText(contenido);
-
-            // Enviar el correo
-            Transport.send(message);
-
-            System.out.println("Correo enviado exitosamente");
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }
-   
-
-
     public static void main(String[] args) {
         // Crear editor, revisor a partir del archivo de usuarios
-        //cargarUsuarios();
-        usuarios.forEach(u -> System.out.println("Usuario: " + u.getUser() + ", Contraseña: " + u.getPassword()+", ROL: " + u.getRol() ));
+        cargarUsuarios();
         //Mostrar las opciones 
         mostrarMenu();
-        Editorial editorial = new Editorial();
-        String asunto = "Asunto del correo";
-        String contenido = "Contenido del correo";
-        String archivoUsuarios = "usuarios.txt";
+        // Editorial editorial = new Editorial();
+        // String asunto = "Asunto del correo";
+        // String contenido = "Contenido del correo";
+        // String archivoUsuarios = "usuarios.txt";
         
-        editorial.enviarCorreo(asunto, contenido, archivoUsuarios);
+        //editorial.enviarCorreo(asunto, contenido, archivoUsuarios);
     }
     
+    public static void mostrarMenu(){
+        Scanner sc = new Scanner(System.in);
+        int op = 0;
+        do{
+            System.out.println("-----------------------------------------------------");
+            System.out.println("1. Mostar los usuarios");
+            System.out.println("2. Mostar revisores asignados a un artīculo");
+            System.out.println("3. Someter Artículo");
+            System.out.println("4. Iniciar Sesión");
+            System.out.println("5. Salir");
+            System.out.print("Seleccione una opción: ");
+            op = sc.nextInt();
+            sc.nextLine();
+            System.out.println("-----------------------------------------------------");
 
+            switch (op) {
+                case 1:
+                    usuarios.forEach(u -> System.out.println("Usuario: " + u.getUser() + ", Contraseña: " + u.getPassword()+", ROL: " + u.getRol() ));
+                    break;
+                case 2:
+                    mostrarUsuariosAsignados();
+                    break;
+                case 3:
+                    System.out.println("Ha escogido la opción de Someter Artículo");
+                    Autor.someterArticulo(sc);
+                    break;
+                case 4:
+                    System.out.println("Ha escogido la opción de Iniciar Sesión");
+                    iniciarSesion(sc);
+                    break;
+                case 5:
+                    System.out.println("Saliendo...");
+                    break;
+                default:
+                System.out.println("Opción Inválida");
+                    break;
+            }
+        }while(op!=5);
+        sc.close();
+    }
+    // public Editorial(){
+        
+    //     props = new Properties();
+    //     props.put("mail.smtp.auth", "true");
+    //     props.put("mail.smtp.starttls.enable", "true");
+    //     props.put("mail.smtp.host", "smtp.gmail.com");
+    //     props.put("mail.smtp.port", "587");
+    // }
+    
+
+    // public void enviarCorreo(String asunto, String contenido, String archivoUsuarios) {
+    //     // Obtener la sesión
+    //     Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+    //         protected PasswordAuthentication getPasswordAuthentication() {
+    //             return new PasswordAuthentication(emailFromString, passString);
+    //         }
+    //     });
+    //      try {
+    //         // Leer destinatarios del archivo usuarios.txt
+    //           if (revisores.isEmpty()) {
+    //             System.out.println("No hay destinatarios en el archivo " + archivoUsuarios);
+    //             return;
+    //         }
+
+    //         // Crear el mensaje de correo
+    //         Message message = new MimeMessage(session);
+    //         message.setFrom(new InternetAddress(emailFromString));
+
+    //         // Añadir destinatarios
+    //         for (Revisor destinatario : revisores) {
+    //             message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario.getCorreoElectronico()));
+    //         }
+
+    //         message.setSubject(asunto);
+    //         message.setText(contenido);
+
+    //         // Enviar el correo
+    //         Transport.send(message);
+
+    //         System.out.println("Correo enviado exitosamente");
+
+    //     } catch (MessagingException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+   
         
 
     public static void cargarUsuarios() {
-        try (BufferedReader br = new BufferedReader(new FileReader("D:\\usuarios.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
@@ -106,13 +142,11 @@ public class Editorial{
                             // Crear y agregar editor a la lista de usuarios
                             Editor editor = new Editor(user, password, nombre, apellido);
                             usuarios.add(editor);
-                            //editores.add(editor);
                             break;
                         case "REVISOR":
                             // Crear y agregar revisor a la lista de usuarios
                             Revisor revisor = new Revisor(user, password, nombre, apellido);
                             usuarios.add(revisor);
-                            //revisores.add(revisor);
                             break;
                         default:
                             System.out.println("Tipo de usuario no permitido: " + rolUsuario);
@@ -124,18 +158,19 @@ public class Editorial{
             e.printStackTrace();
         }
     }
-    public static void mostrarUsuariosAsignados(){
-        for(Revisor revisor : revisores){
-            if(revisor.getArticulo() != null){
 
-                System.out.println("Usuario: "+revisor.getUser() + ", Contraseña: "+revisor.getPassword() + ", Artículo asignado: "+revisor.getArticulo().getTitulo());
+    public static void mostrarUsuariosAsignados(){
+        boolean comprobar = false;
+        for(Revisor revisor : revisores){
+            if(!revisor.getArticulosRevisor().isEmpty()){
+                comprobar = true;
+                System.out.println("Usuario: "+revisor.getUser() + ", Contraseña: "+revisor.getPassword() + ", Artículo(s) Asignado(s): "+revisor.getArticulosRevisor().toString());
             }
         }
+        if(!comprobar)
+            System.out.println("No hay revisores asignados, para asignar revisores ingrese un artículo");
     }
 
-   
-
-    //metodo para iniciar Sesión
     public static void iniciarSesion(Scanner sc){
         System.out.println("Ingrese su usuario: ");
         String userV = sc.nextLine();
@@ -143,16 +178,19 @@ public class Editorial{
         String contraV = sc.nextLine();
         boolean comprobarUsuario = false;
         for(Usuario usuario: usuarios){
-            if(usuario.getPassword().equals(contraV) && usuario.getUser().equals(userV)){ // Comprueba si el usuario, cotraseña ingresado esta en las lista de usuarios
+            if(usuario.getPassword().equals(contraV) && usuario.getUser().equals(userV)){ 
                 comprobarUsuario = true;
-                System.out.println("Bienvenido.... "); // mensaje de bienvenida
                 if (usuario instanceof Revisor){
                     Revisor revisor = (Revisor) usuario;
+                    System.out.println("------------------------------------------------");
+                    System.out.println("Bienvenido " + revisor.getNombre() + " " + revisor.getApellido());
                     revisor.mostrarTareaRealizar();
                     break;
                 }else if(usuario instanceof Editor){
                     Editor editor = (Editor) usuario;
-                    editor.mostarTareaRealizar();
+                    System.out.println("------------------------------------------------");
+                    System.out.println("Bienvenido " + editor.getNombre() + " " + editor.getApellido());
+                    editor.mostarTareaRealizar(sc);
                 }
                 break;
             } 
@@ -163,39 +201,6 @@ public class Editorial{
         }
     }
 
-
-    public static void mostrarMenu(){
-        //Al ejecutar la aplicación, se mostrarán las opciones de Someter Artículo e Iniciar Sesión
-        Scanner sc = new Scanner(System.in);
-        int op = 0;
-        do{
-            System.out.println("1. Someter Articulo");
-            System.out.println("2. Iniciar Sesion");
-            System.out.println("3. Salir");
-            System.out.print("Seleccione una opción: ");
-            op = sc.nextInt();
-            sc.nextLine();
-            switch (op) {
-                case 1:
-                    System.out.println("Ha escogido la opcion de someter articulo");
-                    Autor.someterArticulo(sc);
-                    //asignar automaticamente a dos revisores  de la lista de revisores
-                    break;
-                case 2:
-                    System.out.println("Ha escogido la opcion de Iniciar Sesión");
-                    iniciarSesion(sc);
-                    break;
-                case 3:
-                    System.out.println("Salir");
-                    break;
-                default:
-                System.out.println("Opcion invalida");
-                    break;
-            }
-        }while(op!=3);
-        sc.close();
-
-    }
     
     // public boolean equals(Object obj){ // ver donde usar, implementarlo con equlas
     //     if( this == obj){
@@ -218,7 +223,13 @@ public class Editorial{
         public static void escribirArchivo(String nombreArchivo, Object objeto) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
             bw.write(objeto.toString() + "\n");
-            System.out.println("Objeto escrito en el archivo");
+            if(objeto instanceof Autor){
+                System.out.println(" escrito en el archivo" + nombreArchivo);
+            }else if(objeto instanceof Revisor){
+                System.out.println(" escrito en el archivo" + nombreArchivo);
+            }else if(objeto instanceof Articulo){
+                System.out.println(" escrito en el archivo" + nombreArchivo);
+            }
         } catch (IOException e) {
             e.printStackTrace();
             }

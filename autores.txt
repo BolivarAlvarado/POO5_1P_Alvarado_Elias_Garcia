@@ -1,4 +1,0 @@
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: A7G0S, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
------------------------------
-Nombre: bolivar, Apellido: alvarado, Código: JGB7V, Correo Electrónico: correo, Institución: espol, Campo de investigación: campo, Artículos: []
