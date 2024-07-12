@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -9,7 +8,7 @@ public class Articulo{
   private String resumen;
   private ArrayList<String> palabrasClaves;
   private String codigoArti;
-  private Autor autor;
+  private Autor autor; // COMPROBAR SI SE USA, EN CASO QUE NO, ELIMINARLA
   private EstadoArticulo estado;
   private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -68,12 +67,12 @@ public class Articulo{
     ", Resumen: "  + resumen;
   }
 
-  public void enviarArticuloARevision(){
+  public void enviarArticuloARevision(){//AQUI INICIA LA GESTION DE REVISION
     System.out.println("---------------------------------------");
-    //Asignar a dos revisores de la lista de revisores
-    //enviar correo indicando que se les ha asignado el articulo
     setEstado(EstadoArticulo.EN_REVISION);
-    asignarRevisores(this);
+    //POR HACER:
+    asignarRevisores(this); //Asignar automáticamente a dos revisores de la lista de revisores 
+    //Enviar un correo a los revisores indicando que se les ha asignado tal artículo - PENDIENTE
   } 
 
   private void asignarRevisores(Articulo articulo){
@@ -88,19 +87,17 @@ public class Articulo{
       } while(r2 == r1);
   
       Revisor revisor1 = Editorial.revisores.get(r1);
-      revisor1.setArticulo(this.getTitulo());
-      //Revision revision1 = new Revision(revisor1);
+      revisor1.setArticulo(articulo);
+
       Revisor revisor2 = Editorial.revisores.get(r2);
-      //Revision revision2 = new Revision(revisor2);
-      revisor2.setArticulo(this.getTitulo());
+      revisor2.setArticulo(articulo);
   
-      System.out.println("Revisores asignados al artículo: " + revisor1.getArticulosRevisor());
+      System.out.println("Revisores asignados al artículo: " + articulo.getTitulo());
       System.out.println(" * " + revisor1.getNombre() + " " + revisor1.getApellido());
       System.out.println(" * " + revisor2.getNombre() + " " + revisor1.getApellido());
 
-      //ASIGNAR A UNA REVISION
+      //Aqui se crea una revision del articulo para que puedan acceder los revisores y los editores para proporcionar comentarios y su decisión
       Revision.agregarRevision(revisor1, revisor2,articulo);
-      //METODO PARA ENVIAR CORREO
     }
 
   }

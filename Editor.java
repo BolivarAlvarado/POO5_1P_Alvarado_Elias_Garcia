@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class Editor extends Usuario{
    private String nombreJournal;
-   private Revision revision;
+   private Revision revision; //Atributo añadido para gestionar la revision de los articulos
    private EstadoArticulo estadoArticulo;
    
 
@@ -25,25 +25,24 @@ public class Editor extends Usuario{
     Scanner sc = new Scanner(System.in);
     System.out.println("Ingrese nombre del Journal: ");
     String nombreJournal = sc.nextLine();
+    setNombreJournal(nombreJournal);
 
 
     for(Revision revision : Editorial.revisiones){
       if(revision.getArticulo().getCodigoArti().equals(codigoIngresado)){
-        this.nombreJournal = nombreJournal;
-        setRevision(revision);
-        setEstadoArticulo(EstadoArticulo.EN_REVISION);
+        System.out.println("Estos son los comentarios ingresados por los revisores");
+        System.out.println(revision.getComentarios());
+        setRevision(revision); // LE ASIGNAMOS LA REVISION AL EDITOR
+        setEstadoArticulo(EstadoArticulo.EN_REVISION); //EL ESTADO ARTICULO ESTA EN REVISION
         System.out.println("------------------------------------ ");
-        tomarDecision(revision);
-        //revision.toString(); // mostrar datos de la revision
+        tomarDecision(revision,sc); // LLAMAMOS AL METODO PARA QUE EL EDITOR TOME LA DECISION
       }else{
         System.out.println("Codigo no encontrado...");
       }
     }
-    sc.close();
    }
 
-   public void tomarDecision(Revision revision){
-    Scanner sc = new Scanner(System.in);
+   public void tomarDecision(Revision revision,Scanner sc){
     System.out.println("Editor: " + getNombre() + " " + getApellido());
     System.out.println("Ingrese su decisión para el artículo: " + revision.getArticulo().getTitulo());
     System.out.println("1. ACEPTAR");
@@ -53,9 +52,13 @@ public class Editor extends Usuario{
     switch (decision) {
       case 1:
         setEstadoArticulo(EstadoArticulo.PUBLICADO);
+        Editorial.escribirArchivo("revisiones.txt", toString()); //ESCRITURA DEL EDITOR
+        //NOTIFICAR AL AUTOR LA DECISION DEL ARTICULO - LLAMAR AL METODO NOTIFICAR AUTOR
         break;
       case 2:
         setEstadoArticulo(EstadoArticulo.RECHAZADO);
+        Editorial.escribirArchivo("revisiones.txt", toString()); //ESCRITURA DEL EDITOR
+        //NOTIFICAR AL AUTOR LA DECISION DEL ARTICULO - LLAMAR AL METODO NOTIFICAR AUTOR
         break;
       default:
       System.out.println("Opción no válida");
@@ -70,13 +73,14 @@ public class Editor extends Usuario{
     System.out.print("Ingrese el codigo del artículo: ");
     String codigoIngresado = sc.nextLine();
     decidirSobreArticulo(codigoIngresado);
-    Editorial.escribirArchivo("revisiones.txt", toString());
+    Editorial.escribirArchivo("revisiones.txt", toString()); //Verificar esto
     //notificar al autor sobre la decision final del articulo
   }
   
   @Override
   public String toString(){ //DEBE MOSTAR EL NOMBRE DEL ARTICULO, LA  DECISION FINAL, COMENTARIOS DE LOS REVISORES Y ENVIAR CORREO
     return "Nombre del artículo: " + revision.getArticulo().getTitulo() +
+    ", Editor: " + getNombre() + " " + getApellido() +
      ", Decisión final: " + estadoArticulo +
       ", Comentarios de los revisores: " + revision.getComentarios();
   }

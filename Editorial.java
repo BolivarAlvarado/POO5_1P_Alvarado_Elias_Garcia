@@ -35,8 +35,9 @@ public class Editorial{
         
         //editorial.enviarCorreo(asunto, contenido, archivoUsuarios);
     }
-    
-    public static void mostrarMenu(){
+
+    //Esto es lo que se muestra para controlar las distintas funciones dentro del programa
+    public static void mostrarMenu(){ 
         Scanner sc = new Scanner(System.in);
         int op = 0;
         do{
@@ -201,24 +202,6 @@ public class Editorial{
         }
     }
 
-    
-    // public boolean equals(Object obj){ // ver donde usar, implementarlo con equlas
-    //     if( this == obj){
-    //         return true;
-    //     }if( obj == null){
-    //         return false;
-    //     }if( getClass() != obj.getClass()){
-    //         return false;
-    //     }
-    //     Usuario user = (Usuario) obj;
-    //     if(!this.equals(revision.getArticulo())){
-    //       return false;
-    //     }
-    //     return true;
-    //   }
-
-    
-
 // metodo para escribir en los archivos
         public static void escribirArchivo(String nombreArchivo, Object objeto) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
@@ -234,7 +217,7 @@ public class Editorial{
             e.printStackTrace();
             }
         }
-    
+    // METODO PARA LEER EN LOS ARCHIVOS
     // public static ArrayList<String> LeeFichero(String nombreArchivo) {
     //     ArrayList<String> lineas = new ArrayList<>();
     //     try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) {

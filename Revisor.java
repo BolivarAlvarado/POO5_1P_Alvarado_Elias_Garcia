@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
+//Guardar los datos de los revisores en un archivo revisores.txt
 public class Revisor extends Usuario{
   private String especialidad;
   private int numArtRe;
-  private ArrayList<String> articulosRevisor = new ArrayList<>();
+  private ArrayList<Articulo> articulosRevisor = new ArrayList<>();
   private Decision decisionRevisor;
   
   public Revisor(String user, String password,String nombre,String apellido){
@@ -31,7 +31,7 @@ public class Revisor extends Usuario{
       try (Scanner sc = new Scanner(System.in)) {
         System.out.print("Ingrese su especialidad: ");
         String especialidad = sc.nextLine();
-        System.out.println("Tomar decisión sobre el articulo: " + nombreArticulo);
+        System.out.println("Tomar decisión sobre el artículo: " + nombreArticulo);
         System.out.println("1. ACEPTAR");
         System.out.println("2. RECHAZAR");
         int opc = sc.nextInt();
@@ -40,7 +40,7 @@ public class Revisor extends Usuario{
           case 1:
             setDecisionRevisor(Decision.ACEPTADO);
             setEspecialidad(especialidad);
-            masNumArtRe();;
+            masNumArtRe();
             Editorial.escribirArchivo("revisores.txt", toString());
             System.out.println("Volviendo al menú....");
             break;
@@ -60,29 +60,30 @@ public class Revisor extends Usuario{
 
   }
 
-    public String proporcionarComentarios(){
+    public void proporcionarComentarios(){
       try (Scanner sc = new Scanner(System.in)) {
       System.out.println("Estos son los artículos que se le ha asignado");
-      for (String articulo : articulosRevisor){
+      for (Articulo articulo : articulosRevisor){
         System.out.println(" * " + articulo);
       }
       System.out.println("----------------------------------------------");
       System.out.print("Ingrese el titulo del artículo del cual desea proporcionar comentarios: ");
       String nombreArticulo = sc.nextLine();
-      for(String articulo : articulosRevisor){
-        if(articulo.equals(nombreArticulo)){
+      for(Articulo articulo : articulosRevisor){
+        if(articulo.getTitulo().equals(nombreArticulo)){
           System.out.println("Ingrese los comentarios del artículo: ");
           String comentario = sc.nextLine();
           for(Revision revision: Editorial.revisiones){
             if(revision.getArticulo().getTitulo().equals(nombreArticulo)){
-              System.out.println("Comentarios agregados a la revisión");
               revision.agregarComentario(comentario);
+              decidirSobreArticulo(nombreArticulo);
+              revision.setDecision(getDecisionRevisor());
+              Editorial.escribirArchivo("revisiones.txt", revision.toString());
+              System.out.println("Comentarios agregados a la revisión");
             }
           }
-          return nombreArticulo;
         }
       }
-      return " ";
     }
   }
 
@@ -93,8 +94,7 @@ public class Revisor extends Usuario{
     if(Editorial.articulos.equals(null)){
       System.out.println("No se han ingresado artículos");
     }else{
-      String nombreArticulo = proporcionarComentarios();
-      decidirSobreArticulo(nombreArticulo);
+      proporcionarComentarios();
     }
   }
 
@@ -133,11 +133,11 @@ public class Revisor extends Usuario{
 
 
 
-  public ArrayList<String> getArticulosRevisor(){
+  public ArrayList<Articulo> getArticulosRevisor(){
     return articulosRevisor;
   }
 
-  public void setArticulo(String articulo){
+  public void setArticulo(Articulo articulo){
     articulosRevisor.add(articulo);
   }
   

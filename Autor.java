@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Autor{
@@ -9,7 +8,7 @@ public class Autor{
     private String codigoAutor;
     private String institucion;
     private String campoInvestigacion;
-    private ArrayList<Articulo> articulos;
+    private Articulo articulo; // UN ARTICULO TIENE UN SOLO AUTOR
 private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
   private static String generarCodigoAutor(){
@@ -28,7 +27,6 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         this.institucion = institucion;
         this.campoInvestigacion = campoInvestigacion;
         this.codigoAutor = generarCodigoAutor();
-        this.articulos = new ArrayList<>();
         Editorial.autores.add(this);
     }
 
@@ -51,17 +49,17 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     // Gestion de someter articulo
     public static void someterArticulo(Scanner sc){
-        Autor autor = ingresarDatosAutor(sc); 
-        Editorial.escribirArchivo("autores.txt", autor.toString()); // guarda los datos ingresados en su respectivo archivo
+        Autor autor = ingresarDatosAutor(sc); //Ingresa los datos del autor
+        Editorial.escribirArchivo("autores.txt", autor.toString()); // Guarda los datos ingresados en el archivo autores.txt
 
-        Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor);
-        autor.setArticulo(articulo);
-        articulo.setAutor(autor);
-        Editorial.escribirArchivo("articulos.txt",articulo.toString());// guarda los datos ingresados en su respectivo archivo
+        Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor); //Ingresa los datos del artículo
+        autor.setArticulo(articulo); // Le asigna el articulo al autor
+        articulo.setAutor(autor); // COMPROBAR SI SE USA, EN CASO QUE NO, ELIMINARLA
+        Editorial.escribirArchivo("articulos.txt",articulo.toString());// Guarda los datos ingresados en el archivo articulos.txt
 
         System.out.println("---------------------------------------");
         System.out.println("Iniciar Gestión de Revisión?"); 
-        System.out.println("Pulse 1 si desea continuar, caso contrario pulse cualquier otro número");
+        System.out.println("Pulse '1' si desea continuar, caso contrario pulse cualquier otro número");
         System.out.print("Ingresar opción: ");
         int opc = sc.nextInt();
         sc.nextLine();
@@ -82,7 +80,7 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
          ", Correo Electrónico: " + correoElectronico + 
         ", Institución: "+ institucion + 
         ", Campo de investigación: " + campoInvestigacion + 
-        ", Artículos: " + articulos.toString();
+        ", Artículos: " + articulo.toString();
     }
 
 
@@ -99,11 +97,11 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     }
 
     public void setArticulo(Articulo articulo){
-        articulos.add(articulo);
+        this.articulo = articulo;
     }
 
-    public ArrayList<Articulo> getArticulos(){
-        return articulos;  
+    public Articulo getArticulos(){
+        return articulo;  
     }
     
     public String getCodigoAutor(){
