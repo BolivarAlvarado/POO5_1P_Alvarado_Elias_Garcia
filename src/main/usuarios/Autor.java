@@ -1,5 +1,12 @@
+package main.usuarios;
+
+
+
 import java.util.Random;
 import java.util.Scanner;
+
+import main.Editorial;
+import main.revision.Articulo;
 
 public class Autor{
     private String nombre;

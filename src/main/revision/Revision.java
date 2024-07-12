@@ -1,4 +1,10 @@
+package main.revision;
+
+
 import java.util.ArrayList;
+
+import main.Editorial;
+import main.usuarios.Revisor;
 
 public class Revision{
   private Articulo articulo; //articulo

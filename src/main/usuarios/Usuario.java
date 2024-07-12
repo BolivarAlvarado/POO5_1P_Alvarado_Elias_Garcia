@@ -1,4 +1,9 @@
-abstract class Usuario {
+package main.usuarios;
+
+
+import main.RolUsuario;
+
+public abstract class Usuario {
     protected String user;
     protected String password;
     protected String nombre;

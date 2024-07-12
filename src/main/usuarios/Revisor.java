@@ -1,4 +1,13 @@
+package main.usuarios;
+
+
 import java.util.Scanner;
+
+import main.RolUsuario;
+import main.revision.Articulo;
+import main.revision.Decision;
+import main.revision.Revision;
+import main.Editorial;
 import java.util.ArrayList;
 //Guardar los datos de los revisores en un archivo revisores.txt
 public class Revisor extends Usuario{

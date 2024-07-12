@@ -1,6 +1,13 @@
+package main.revision;
+
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import main.Editorial;
+import main.usuarios.Autor;
+import main.usuarios.Revisor;
 
 public class Articulo{
   private String titulo;

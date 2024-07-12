@@ -1,4 +1,13 @@
+package main.usuarios;
+
+
 import java.util.Scanner;
+
+import main.Editorial;
+import main.RolUsuario;
+import main.revision.EstadoArticulo;
+import main.revision.Revision;
+
 public class Editor extends Usuario{
    private String nombreJournal;
    private Revision revision; //Atributo añadido para gestionar la revision de los articulos

@@ -1,7 +1,11 @@
+package main;
 //package emailsender;
 import java.util.ArrayList;
 //import java.util.List;
 import java.util.Scanner;
+
+import main.usuarios.*;
+import main.revision.*;
 import java.io.*;
 //import java.util.Properties;
 //import javax.mail.*;
@@ -22,7 +26,6 @@ public class Editorial{
     public static ArrayList<Editor> editores = new ArrayList<>();
     public static ArrayList<Articulo> articulos = new ArrayList<>();
     public static ArrayList<Revision> revisiones = new ArrayList<>();
-    
     public static void main(String[] args) {
         // Crear editor, revisor a partir del archivo de usuarios
         cargarUsuarios();
