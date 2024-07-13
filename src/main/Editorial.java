@@ -129,7 +129,7 @@ public class Editorial{
         
 
     public static void cargarUsuarios() {
-        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/archivos/usuarios.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
@@ -207,7 +207,8 @@ public class Editorial{
 
 // metodo para escribir en los archivos
         public static void escribirArchivo(String nombreArchivo, Object objeto) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
+            String archivo = "src/archivos/" + nombreArchivo;
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
             bw.write(objeto.toString() + "\n");
             if(objeto instanceof Autor){
                 System.out.println(" escrito en el archivo" + nombreArchivo);
