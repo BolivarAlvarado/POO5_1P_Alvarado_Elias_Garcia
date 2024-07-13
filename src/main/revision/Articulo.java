@@ -158,4 +158,5 @@ public class Articulo{
   public void setEstado(EstadoArticulo estado){
     this.estado = estado;
   }
+  
 }

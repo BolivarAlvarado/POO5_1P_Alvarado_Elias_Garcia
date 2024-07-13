@@ -168,7 +168,7 @@ public class Editorial{
         for(Revisor revisor : revisores){
             if(!revisor.getArticulosRevisor().isEmpty()){
                 comprobar = true;
-                System.out.println("Usuario: "+revisor.getUser() + ", Contraseña: "+revisor.getPassword() + ", Artículo(s) Asignado(s): "+revisor.getArticulosRevisor().toString());
+                System.out.println("Usuario: "+revisor.getUser() + ", Contraseña: "+revisor.getPassword() + ", Artículo(s) Asignado(s): " + revisor.getNombreArticulos());
             }
         }
         if(!comprobar)
