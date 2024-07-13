@@ -172,13 +172,13 @@ public class Editorial{
             }
         }
         if(!comprobar)
-            System.out.println("No hay revisores asignados, para asignar revisores ingrese un artículo");
+            System.out.println("No hay revisores asignados, para asignar revisores ingrese un artículo(Opción 3)");
     }
 
     public static void iniciarSesion(Scanner sc){
-        System.out.println("Ingrese su usuario: ");
+        System.out.print("Ingrese su usuario: ");
         String userV = sc.nextLine();
-        System.out.println("Ingrese su contraseña: ");
+        System.out.print("Ingrese su contraseña: ");
         String contraV = sc.nextLine();
         boolean comprobarUsuario = false;
         for(Usuario usuario: usuarios){
