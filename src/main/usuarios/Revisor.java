@@ -145,7 +145,13 @@ public class Revisor extends Usuario{
   public ArrayList<Articulo> getArticulosRevisor(){
     return articulosRevisor;
   }
-
+  public ArrayList<String> getNombreArticulos(){
+    ArrayList<String> nombresArticulo = new ArrayList<>();
+    for(Articulo nombre : articulosRevisor){
+      nombresArticulo.add(nombre.getTitulo());
+    }
+    return nombresArticulo;
+  }
   public void setArticulo(Articulo articulo){
     articulosRevisor.add(articulo);
   }
