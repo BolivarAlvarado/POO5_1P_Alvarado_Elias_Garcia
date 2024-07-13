@@ -207,8 +207,7 @@ public class Editorial{
 
 // metodo para escribir en los archivos
         public static void escribirArchivo(String nombreArchivo, Object objeto) {
-            String archivo = "src/archivos/" + nombreArchivo;
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
             bw.write(objeto.toString() + "\n");
             if(objeto instanceof Autor){
                 System.out.println(" escrito en el archivo" + nombreArchivo);

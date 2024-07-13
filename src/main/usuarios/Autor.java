@@ -57,12 +57,12 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     // Gestion de someter articulo
     public static void someterArticulo(Scanner sc){
         Autor autor = ingresarDatosAutor(sc); //Ingresa los datos del autor
-        Editorial.escribirArchivo("autores.txt", autor.toString()); // Guarda los datos ingresados en el archivo autores.txt
+
 
         Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor); //Ingresa los datos del artículo
         autor.setArticulo(articulo); // Le asigna el articulo al autor
-        articulo.setAutor(autor); // COMPROBAR SI SE USA, EN CASO QUE NO, ELIMINARLA
-        Editorial.escribirArchivo("articulos.txt",articulo.toString());// Guarda los datos ingresados en el archivo articulos.txt
+        Editorial.escribirArchivo("src/archivos/autores.txt", autor.toString());// Guarda los datos ingresados en el archivo autores.txt
+        Editorial.escribirArchivo("src/archivos/articulos.txt",articulo.toString());// Guarda los datos ingresados en el archivo articulos.txt
 
         System.out.println("---------------------------------------");
         System.out.println("Iniciar Gestión de Revisión?"); 
