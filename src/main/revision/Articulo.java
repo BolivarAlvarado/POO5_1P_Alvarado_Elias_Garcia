@@ -1,162 +1,123 @@
-package main.revision;
-
-
-import java.util.ArrayList;
-import java.util.Random;
+package com.mycompany.correo1;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
+/**
+ *
+ * @author edgar
+ */
+public class Articulo {
+    
+    private String codigoUnicoArticulo;
+    private String titulo;
+    private String resumen;
+    private String contenido;
+    private ArrayList<String> palabraClaves;
+    private Autor autor;
+    private EstadoArticulo estadoArticulo;
 
-import main.Editorial;
-import main.usuarios.Autor;
-import main.usuarios.Revisor;
+    
+    
 
-public class Articulo{
-  private String titulo;
-  private String contenido;
-  private String resumen;
-  private ArrayList<String> palabrasClaves;
-  private String codigoArti;
-  private Autor autor; // COMPROBAR SI SE USA, EN CASO QUE NO, ELIMINARLA
-  private EstadoArticulo estado;
-  private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-  private static String generarCodigoArticulo(){
-    Random rd = new Random();
-    StringBuilder codigo = new StringBuilder(5);
-    for(int i = 0; i< 5;i++){
-      int var = rd.nextInt(caracteres.length());
-      codigo.append(caracteres.charAt(var));
+    public Articulo(String codigoUnicoArticulo, String titulo, String resumen, String contenido, ArrayList<String> palabraClaves, Autor autor, EstadoArticulo estadoArticulo) {
+        this.codigoUnicoArticulo = codigoUnicoArticulo;
+        this.titulo = titulo;
+        this.resumen = resumen;
+        this.contenido = contenido;
+        this.palabraClaves = palabraClaves;
+        this.autor=autor;
+        this.estadoArticulo=estadoArticulo;
     }
-    return codigo.toString();
-}
-
-  public Articulo(Autor autor,String titulo, String contenido, ArrayList<String> palabrasClaves, EstadoArticulo estado, String resumen){
-    this.titulo = titulo;
-    this.contenido = contenido;
-    this.resumen = resumen;
-    this.codigoArti = generarCodigoArticulo();
-    this.palabrasClaves = palabrasClaves;
-    this.estado = estado;
-    this.autor = autor;
-    Editorial.articulos.add(this);
-  }
-
-  public static Articulo ingresarDatosArticulo(Scanner sc, Autor autor){
-    System.out.println("------------------------------------");
-    System.out.println(autor.getNombre() + " " + autor.getApellido() + ", Ingrese los datos de su artículo");
-    System.out.println("------------------------------------");
-    System.out.print("Ingrese el título del artículo: ");
-    String titulo = sc.nextLine();
-    System.out.print("Ingrese el contenido del artículo: ");
-    String contenido = sc.nextLine();
-    System.out.print("Ingrese la cantidad de palabras clave que va ingresar: ");
-    int cantP = sc.nextInt();
-    sc.nextLine();
-    ArrayList<String> palabrasClaves = new ArrayList<>();
-    for(int i = 1; i < cantP + 1;i++){
-      System.out.println("Ingrese la palabra clave N(" +i+")");
-      String pClave = sc.nextLine();
-      palabrasClaves.add(pClave);
+    
+    public static Articulo ingresarDatosArti(Scanner sc, Autor autor){
+        
+        System.out.println("Ingrese los datos de su artículo-------------- ");
+        System.out.println("-Ingrese el título: ");
+        String titulo=sc.nextLine();
+        System.out.println("-Ingrese el resumen: ");
+        String resumen=sc.nextLine();
+        System.out.println("-Ingrese el contenido: ");
+        String contenido=sc.nextLine();
+        System.out.println("-Ingrese la cantidad de palabras claves: ");
+        int cantPala=sc.nextInt();
+        sc.nextLine();
+        ArrayList<String> palabraClaves=new ArrayList<>();
+        for (int i=0; i<cantPala; i++){
+            System.out.println("-Ingrese la palabra clave N(" +(i+1)+")");
+            String palaClave=sc.nextLine();
+            palabraClaves.add(palaClave);
+        }
+        String codigoUnicoArticulo=Sistema.generarCodigo();
+        EstadoArticulo estadoArticulo=EstadoArticulo.INGRESADO;
+        Articulo articulo=new Articulo(codigoUnicoArticulo, titulo, resumen, contenido, palabraClaves, autor,estadoArticulo);
+        guardarArticulo(articulo);
+        return new Articulo(codigoUnicoArticulo, titulo, resumen, contenido, palabraClaves, autor,estadoArticulo);
     }
-    System.out.print("Ingrese resumen del artículo: ");
-    String resumen = sc.nextLine();
+    
+    
+    
+    @Override
+    public String toString() {
+        return """
+               Articulo------------------------
+               Titulo: """+getTitulo()+"\n***Codigo: "+ getCodigoUnicoArticulo()+"\n***Resumen: "+ getResumen()+ "\n***Palabras claves: "+ getPalabraClaves()+"\n***Contenido: "+ getContenido();
+    }
+    
+    
+    
 
-    return new Articulo(autor,titulo,contenido,palabrasClaves,EstadoArticulo.INGRESADO,resumen);
-  }
-
-  @Override
-  public String toString(){
-    return "Autor: "+ autor.getNombre() + " " + autor.getApellido() + 
-    ", Título: " + titulo + 
-    ", Código: "+ codigoArti + 
-    ", Contenido: " + contenido +  
-    ", Palabras Claves: " + palabrasClaves.toString() + 
-    ", Estado artículo: " + estado + 
-    ", Resumen: "  + resumen;
-  }
-
-  public void enviarArticuloARevision(){//AQUI INICIA LA GESTION DE REVISION
-    System.out.println("---------------------------------------");
-    setEstado(EstadoArticulo.EN_REVISION);
-    //POR HACER:
-    asignarRevisores(this); //Asignar automáticamente a dos revisores de la lista de revisores 
-    //Enviar un correo a los revisores indicando que se les ha asignado tal artículo - PENDIENTE
-  } 
-
-  private void asignarRevisores(Articulo articulo){
-    Random rd = new Random();
-    if (Editorial.revisores.size() < 2){
-      System.out.println("No hay suficientes revisores");
-    }else{
-      int r1 = rd.nextInt(Editorial.revisores.size());
-      int r2;
-      do{
-        r2 = rd.nextInt(Editorial.revisores.size());
-      } while(r2 == r1);
-  
-      Revisor revisor1 = Editorial.revisores.get(r1);
-      revisor1.setArticulo(articulo);
-
-      Revisor revisor2 = Editorial.revisores.get(r2);
-      revisor2.setArticulo(articulo);
-  
-      System.out.println("Revisores asignados al artículo: " + articulo.getTitulo());
-      System.out.println(" * " + revisor1.getNombre() + " " + revisor1.getApellido());
-      System.out.println(" * " + revisor2.getNombre() + " " + revisor1.getApellido());
-
-      //Aqui se crea una revision del articulo para que puedan acceder los revisores y los editores para proporcionar comentarios y su decisión
-      Revision.agregarRevision(revisor1, revisor2,articulo);
+    public String getCodigoUnicoArticulo() {
+        return codigoUnicoArticulo;
     }
 
-  }
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getResumen() {
+        return resumen;
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public ArrayList<String> getPalabraClaves() {
+        return palabraClaves;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+    
+    
+    
+
+    public String toString1(){
+        return getCodigoUnicoArticulo()+","+getTitulo()+","+getResumen()+","+getContenido()+","+getPalabraClaves()+","+getAutor()+","+getEstadoArticulo();
+    }
+    
+    
+    
 
 
+    public EstadoArticulo getEstadoArticulo() {
+        return estadoArticulo;
+    }
+    
+    
+    
 
 
-
-
-
-
-  
-  public String getTitulo(){
-    return titulo;
-  }
-
-
-  public void setTitulo(String titulo){
-    this.titulo=titulo;
-  }
-  public String getContenido(){
-    return contenido;
-  }
-  public void setContenido(String contenido){
-    this.contenido=contenido;
-  }
-  public String getResumen(){
-    return resumen;
-  }
-  public void setResumen(String resumen){
-    this.resumen=resumen;
-  }
-  public String getCodigoArti(){
-    return codigoArti;
-  }
-  public ArrayList<String> getPalaCla(){
-    return palabrasClaves;
-  }
-  public void setPalaCla(ArrayList<String> palabrasClaves){
-    this.palabrasClaves=palabrasClaves;
-  }
-  public Autor getAutor(){
-    return autor;
-  }
-  public void setAutor(Autor autor){
-    this.autor=autor;
-  }
-  public EstadoArticulo getEstado(){
-    return estado;
-  }
-  public void setEstado(EstadoArticulo estado){
-    this.estado = estado;
-  }
-  
+    public static void guardarArticulo(Articulo articulo){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Articulos.txt", true))) {
+            bw.write(articulo.toString1());
+            bw.newLine();
+            System.out.println("Artículo sometido exitosamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
