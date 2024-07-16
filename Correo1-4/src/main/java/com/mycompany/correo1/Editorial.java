@@ -1,16 +1,16 @@
 package com.mycompany.correo1;
 import java.util.*;
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+/**
+ * Clase que gestiona el sistema editorial, incluyendo la carga de usuarios,
+ * la gestión de artículos y la interacción con los usuarios.
 
+ */
 public class Editorial{
-    //private static String emailFromString="edgarcia20033@gmail.com";
-    //MegMente123
-    //private Properties props;
 
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
     public static ArrayList<Revisor> revisores = new ArrayList<>();
@@ -20,14 +20,14 @@ public class Editorial{
     public static ArrayList<Revision> revisiones = new ArrayList<>();
     
     public static void main(String[] args) {
-        // Crear editor, revisor a partir del archivo de usuarios
         cargarUsuarios();
-        //Mostrar las opciones 
         mostrarMenu();
  
     }
 
-
+    /**
+     * Muestra el menú principal de la aplicación y gestiona las opciones seleccionadas.
+     */
     public static void mostrarMenu(){ 
         Scanner sc = new Scanner(System.in);
         int op = 0;
@@ -67,7 +67,9 @@ public class Editorial{
             }
         }while(op!=5);
     }
-
+    /**
+     * Carga los usuarios desde el archivo usuarios.txt y los agrega a la lista de usuarios.
+     */
     public static void cargarUsuarios() {
         try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String linea;
@@ -84,12 +86,10 @@ public class Editorial{
 
                     switch (rolUsuario) {
                         case "EDITOR":
-                            // Crear y agregar editor a la lista de usuarios
                             Editor editor = new Editor(user, password, nombre, apellido,correo);
                             usuarios.add(editor);
                             break;
                         case "REVISOR":
-                            // Crear y agregar revisor a la lista de usuarios
                             Revisor revisor = new Revisor(user, password, nombre, apellido,correo);
                             usuarios.add(revisor);
                             break;
@@ -104,6 +104,9 @@ public class Editorial{
         }
     }
 
+    /**
+     * Muestra los revisores que tienen artículos asignados.
+     */
     public static void mostrarUsuariosAsignados(){
         boolean comprobar = false;
         for(Revisor revisor : revisores){
@@ -115,7 +118,11 @@ public class Editorial{
         if(!comprobar)
             System.out.println("No hay revisores asignados, para asignar revisores ingrese un artículo(Opción 3)");
     }
-
+    /**
+     * Permite a un usuario iniciar sesión en el sistema.
+     * 
+     * @param sc Un objeto Scanner para leer la entrada del usuario.
+     */
     public static void iniciarSesion(Scanner sc){
         System.out.print("Ingrese su usuario: ");
         String userV = sc.nextLine();
@@ -146,7 +153,12 @@ public class Editorial{
         }
     }
 
-// metodo para escribir en los archivos
+   /**
+     * Escribe un objeto en el archivo especificado.
+     * 
+     * @param nombreArchivo El nombre del archivo donde se escribirá el objeto.
+     * @param objeto El objeto a escribir(editor,revisor,revision,articulo,autor).
+     */
         public static void escribirArchivo(String nombreArchivo, Object objeto) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
             bw.write(objeto.toString() + "\n");
@@ -162,4 +174,3 @@ public class Editorial{
             }
         }      
 }
-

@@ -3,8 +3,9 @@ import java.util.Scanner;
 import java.util.Random;
 
 /**
- *
- * @author edgar
+ * Clase que representa a un autor en el sistema editorial.
+ * Contiene información sobre el nombre, apellido, correo electrónico,
+ * institución, campo de investigación y el artículo asociado.
  */
 public class Autor{
     private String nombre;
@@ -16,6 +17,11 @@ public class Autor{
     private Articulo articulo; // UN ARTICULO TIENE UN SOLO AUTOR
 private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+/**
+* Genera un código único para el autor.
+* 
+* @return Un código de autor aleatorio.
+*/
   private static String generarCodigoAutor(){
     Random rd = new Random();
     StringBuilder codigo = new StringBuilder(5);
@@ -25,6 +31,16 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     }
     return codigo.toString();
 }
+
+    /**
+    * Constructor para crear un nuevo autor.
+    * 
+    * @param nombre El nombre del autor.
+    * @param apellido El apellido del autor.
+    * @param correoElectronico El correo electrónico del autor.
+    * @param institucion La institución del autor.
+    * @param campoInvestigacion El campo de investigación del autor.
+    */
     public Autor(String nombre, String apellido, String correoElectronico, String institucion, String campoInvestigacion){
         this.nombre = nombre;
         this.apellido = apellido;
@@ -35,6 +51,12 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Editorial.autores.add(this);
     }
 
+    /**
+     * Ingresa los datos de un nuevo autor a través de la entrada del usuario.
+     * 
+     * @param sc Un objeto Scanner para leer la entrada del usuario.
+     * @return Un nuevo objeto Autor con los datos ingresados.
+     */
     public static Autor ingresarDatosAutor(Scanner sc){
         System.out.println("Antes de someter un artículo, debe registrar sus datos en la aplicación");
         System.out.print("Ingrese su nombre: ");
@@ -51,9 +73,13 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     }
 
 
-    // Gestion de someter articulo
+    /**
+     * Inicia el proceso de someter un artículo.
+     * 
+     * @param sc Un objeto Scanner para leer la entrada del usuario.
+     */
     public static void someterArticulo(Scanner sc){
-        Autor autor = ingresarDatosAutor(sc); //Ingresa los datos del autor
+        Autor autor = ingresarDatosAutor(sc); //Ingresa los datos del autor 
 
 
         Articulo articulo = Articulo.ingresarDatosArticulo(sc, autor); //Ingresa los datos del artículo
@@ -62,7 +88,7 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Editorial.escribirArchivo("articulos.txt",articulo.toString());// Guarda los datos ingresados en el archivo articulos.txt
 
         System.out.println("---------------------------------------");
-        System.out.println("Iniciar Gestión de Revisión?"); 
+        System.out.println("Iniciar Gestión de Revisión?"); //Si pulsa 1, se asignan revisores al artículo
         System.out.println("Pulse '1' si desea continuar, caso contrario pulse cualquier otro número");
         System.out.print("Ingresar opción: ");
         int opc = sc.nextInt();
@@ -74,7 +100,11 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             System.out.println("Volviendo al menú...");
         }
     }
-
+    /**
+     * Representa al autor como una cadena de texto.
+     * 
+     * @return Una representación en forma de cadena del autor.
+     */
 
     @Override
     public String toString(){
@@ -91,7 +121,7 @@ private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 
 
-    //getters, setters
+    // Métodos getters y setters
     public String getNombre(){
         return nombre;
     }

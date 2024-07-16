@@ -4,8 +4,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
 /**
- *
- * @author edgar
+ * Clase que representa un artículo en el sistema editorial.
+ * Contiene información sobre el título, contenido, resumen, palabras clave y estado del artículo.
+ * También maneja la asignación de revisores y el envío de correos electrónicos relacionados.
  */
 public class Articulo{
   private String titulo;
@@ -17,6 +18,11 @@ public class Articulo{
   private EstadoArticulo estado;
   private static final String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+  /**
+  * Genera un código único para el artículo.
+  * 
+  * @return Un código de artículo aleatorio.
+  */
   private static String generarCodigoArticulo(){
     Random rd = new Random();
     StringBuilder codigo = new StringBuilder(5);
@@ -26,7 +32,16 @@ public class Articulo{
     }
     return codigo.toString();
 }
-
+    /**
+     * Constructor para crear un nuevo artículo.
+     * 
+     * @param autor El autor del artículo.
+     * @param titulo El título del artículo.
+     * @param contenido El contenido del artículo.
+     * @param palabrasClaves Lista de palabras clave asociadas al artículo.
+     * @param estado El estado actual del artículo.
+     * @param resumen Un resumen del artículo.
+     */
   public Articulo(Autor autor,String titulo, String contenido, ArrayList<String> palabrasClaves, EstadoArticulo estado, String resumen){
     this.titulo = titulo;
     this.contenido = contenido;
@@ -38,6 +53,13 @@ public class Articulo{
     Editorial.articulos.add(this);
   }
 
+    /**
+     * Ingresa los datos de un nuevo artículo a través de la entrada del usuario.
+     * 
+     * @param sc Un objeto Scanner para leer la entrada del usuario.
+     * @param autor El autor que está ingresando el artículo.
+     * @return Un nuevo objeto Articulo con los datos ingresados.
+     */
   public static Articulo ingresarDatosArticulo(Scanner sc, Autor autor){
     System.out.println("------------------------------------");
     System.out.println(autor.getNombre() + " " + autor.getApellido() + ", Ingrese los datos de su artículo");
@@ -61,6 +83,11 @@ public class Articulo{
     return new Articulo(autor,titulo,contenido,palabrasClaves,EstadoArticulo.INGRESADO,resumen);
   }
 
+    /**
+     * Representa el artículo como una cadena de texto.
+     * 
+     * @return Una representación en forma de cadena del artículo.
+     */
   @Override
   public String toString(){
     return "Autor: "+ autor.getNombre() + " " + autor.getApellido() + 
@@ -71,15 +98,21 @@ public class Articulo{
     ", Estado artículo: " + estado + 
     ", Resumen: "  + resumen;
   }
-
-  public void enviarArticuloARevision(){//AQUI INICIA LA GESTION DE REVISION
+    /**
+     * Cambia el estado del artículo a 'en revisión' y asigna revisores.
+     * @param this el articulo que llamo al método 
+     */
+  public void enviarArticuloARevision(){
     System.out.println("---------------------------------------");
     setEstado(EstadoArticulo.EN_REVISION);
-    //POR HACER:
-    asignarRevisores(this); //Asignar automáticamente a dos revisores de la lista de revisores 
-    //Enviar un correo a los revisores indicando que se les ha asignado tal artículo - PENDIENTE
+    asignarRevisores(this); 
   } 
-
+    /**
+     * Asigna revisores al artículo tomando dos al azar de la lista de revisores
+     * Envía correos electrónicos a los revisores notificando la asignación.
+     * 
+     * @param articulo El artículo al que se le asignarán revisores.
+     */
   private void asignarRevisores(Articulo articulo){
     Random rd = new Random();
     if (Editorial.revisores.size() < 2){
@@ -98,25 +131,21 @@ public class Articulo{
       Revisor revisor2 = Editorial.revisores.get(r2);
       revisor2.setArticulo(articulo);
       revisor2.enviarCorreo(revisor1.getCorreoElectronico(), "ASIGNACION DE ARTICULO", articulo.toString());
-     
-      //Editorial.enviarCorreo(revisor1.getCorreoElectronico(),"Asignación de artículo" , articulo.toString());
-      //Editorial.enviarCorreo(revisor2.getCorreoElectronico(),"Asignación de artículo" , articulo.toString());
-
-
+ 
       System.out.println("Revisores asignados al artículo: " + articulo.getTitulo());
       System.out.println(" * " + revisor1.getNombre() + " " + revisor1.getApellido());
       System.out.println(" * " + revisor2.getNombre() + " " + revisor1.getApellido());
-
-      //Aqui se crea una revision del articulo para que puedan acceder los revisores y los editores para proporcionar comentarios y su decisión
+      
+      //Se agrega la revisión del artículo a lista de revisiones para que cuando se acceda como editor, se pueda visualizar
       Revision.agregarRevision(revisor1, revisor2,articulo);
     }
 
   }
 
+  // Métodos getters y setters
   public String getTitulo(){
     return titulo;
   }
-
 
   public void setTitulo(String titulo){
     this.titulo=titulo;

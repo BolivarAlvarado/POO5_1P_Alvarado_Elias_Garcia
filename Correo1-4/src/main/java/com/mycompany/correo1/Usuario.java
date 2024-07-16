@@ -1,7 +1,7 @@
 package com.mycompany.correo1;
 /**
- *
- * @author edgar
+ * Clase abstracta que representa a un usuario en el sistema.
+ * Proporciona métodos para la gestión de usuarios y envío de correos electrónicos.
  */
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -15,9 +15,27 @@ public abstract class Usuario {
     protected String correoElectronico;
     protected RolUsuario rol;
 
-    public abstract String generarCorreoElectronico(String nombre, String apellido); 
+    public abstract String generarCorreoElectronico(String nombre, String apellido);
+    
+    /**
+     * Permite al usuario(Editor/Revisor) decidir sobre un artículo.
+     * 
+     * @param nombreArticulo El nombre del artículo en cuestión.
+     * @param sc Un objeto Scanner para la entrada del usuario.
+     */
+
     public abstract void decidirSobreArticulo(String nombreArticulo, Scanner sc);
 
+    /**
+     * Constructor para la clase Usuario.
+     * 
+     * @param user El nombre de usuario.
+     * @param password La contraseña del usuario.
+     * @param nombre El nombre real del usuario.
+     * @param apellido El apellido del usuario.
+     * @param rol El rol del usuario en el sistema.
+     * @param correo El correo electrónico del usuario.
+     */
     public Usuario(String user, String password, String nombre, String apellido, RolUsuario rol,String correo){
         this.user = user;
         this.correoElectronico = correo;
@@ -26,13 +44,14 @@ public abstract class Usuario {
         this.apellido = apellido;
         this.rol = rol;
     }
-
-    public Usuario(String user, String password){
-        this.user = user;
-        this.password = password;
-    }
-
-    public void enviarCorreo(String destinatario, String asunto, String cuerpo){//DESTINATARIO = CORREO AL QUE LLEGA
+    /**
+     * Envía un correo electrónico al destinatario especificado.
+     * 
+     * @param destinatario El correo electrónico del destinatario.
+     * @param asunto El asunto del correo electrónico.
+     * @param cuerpo El cuerpo del correo electrónico.
+     */
+    public void enviarCorreo(String destinatario, String asunto, String cuerpo){
         Properties props=new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");

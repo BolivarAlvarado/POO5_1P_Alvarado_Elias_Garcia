@@ -1,11 +1,9 @@
 package com.mycompany.correo1;
 import java.util.Scanner;
 
-
-
 /**
- *
- * @author edgar
+ * Clase que representa a un editor en el sistema editorial.
+ * Un editor puede tomar decisiones sobre los artículos y gestionar el proceso de revisión.
  */
 public class Editor extends Usuario{
    private String nombreJournal;
@@ -13,7 +11,15 @@ public class Editor extends Usuario{
    private EstadoArticulo estadoArticulo;
    
 
-
+    /**
+     * Constructor para crear un nuevo editor.
+     * 
+     * @param user El nombre de usuario del editor.
+     * @param password La contraseña del editor.
+     * @param nombre El nombre del editor.
+     * @param apellido El apellido del editor.
+     * @param correoElectronico El correo electrónico del editor.
+     */
   public Editor(String user, String password, String nombre, String apellido, String correoElectronico){
     super(user,password,nombre,apellido,RolUsuario.EDITOR,correoElectronico);
     Editorial.editores.add(this);
@@ -24,24 +30,27 @@ public class Editor extends Usuario{
       String nombreUsuario = nombre.toLowerCase() + "." + apellido.toLowerCase();
       return nombreUsuario + "@gmail.com";
    }
-
-
-
+    /**
+     * Permite al Editor decidir sobre un artículo.
+     * 
+     * @param codigoIngresado El código del artículo, en el cual tomará su decisión.
+     * @param sc Un objeto Scanner para la entrada del usuario.
+     */
    @Override
    public void decidirSobreArticulo(String codigoIngresado,Scanner sc){
     System.out.println("Ingrese nombre del Journal: ");
     String nombreJournal = sc.nextLine();
     setNombreJournal(nombreJournal);
 
-
+    //busca si el artículo ya paso por el proceso de revisión de los revisores
     for(Revision revision : Editorial.revisiones){
       if(revision.getArticulo().getCodigoArti().equals(codigoIngresado)){
-        System.out.println("Estos son los comentarios ingresados por los revisores");
-        System.out.println(revision.getComentarios());
-        setRevision(revision); // LE ASIGNAMOS LA REVISION AL EDITOR
-        setEstadoArticulo(EstadoArticulo.EN_REVISION); //EL ESTADO ARTICULO ESTA EN REVISION
+        System.out.println("Estos son los comentarios ingresados por los revisores y su decisión");
+        System.out.println(revision.getComentarios() + " " + revision.getArticulo().getEstado());
+        setRevision(revision); // se le asigna la revisión al editor
+        setEstadoArticulo(EstadoArticulo.EN_REVISION); //se cambia el estado del artículo
         System.out.println("------------------------------------ ");
-        tomarDecision(revision,sc); // LLAMAMOS AL METODO PARA QUE EL EDITOR TOME LA DECISION
+        tomarDecision(revision,sc); //inicia el proceso de toma de decisión del editor
         break;
       }else{
         System.out.println("Codigo no encontrado...");
@@ -49,6 +58,12 @@ public class Editor extends Usuario{
     }
    }
 
+    /**
+     * Toma una decisión sobre un artículo revisado.
+     * 
+     * @param revision La revisión del artículo.
+     * @param sc Un objeto Scanner para leer la entrada del usuario.
+     */
    public void tomarDecision(Revision revision,Scanner sc){
     System.out.println("Editor: " + getNombre() + " " + getApellido());
     System.out.println("Ingrese su decisión para el artículo: " + revision.getArticulo().getTitulo());
@@ -60,18 +75,16 @@ public class Editor extends Usuario{
     switch (decision) {
       case 1:
         setEstadoArticulo(EstadoArticulo.PUBLICADO);
-        Editorial.escribirArchivo("revisiones.txt", toString()); //ESCRITURA DEL EDITOR
-        //NOTIFICAR AL AUTOR LA DECISION DEL ARTICULO - LLAMAR AL METODO NOTIFICAR AUTOR
-        //revision.notificarAutor(revision.getArticulo(), estadoArticulo);
-        enviarCorreo("bolivaralvarado09@gmail.com","RESUTADOR FINAL",toString()); //Correo del autor
+        Editorial.escribirArchivo("revisiones.txt", toString()); //se guardan los datos en el archivo
+        //Se notifica al autor los resultados de su artículo
+        enviarCorreo(revision.getArticulo().getAutor().getCorreoElectronico(),"RESUTADOR FINAL",toString()); //Correo del autor
         System.out.println("Volviendo al menú...");
         break;
       case 2:
         setEstadoArticulo(EstadoArticulo.RECHAZADO);
-        Editorial.escribirArchivo("revisiones.txt", toString()); //ESCRITURA DEL EDITOR
-        //NOTIFICAR AL AUTOR LA DECISION DEL ARTICULO - LLAMAR AL METODO NOTIFICAR AUTOR
-        //revision.notificarAutor(revision.getArticulo(), estadoArticulo);
-        enviarCorreo("DESTINARIO - AUTOR","RESUTADOR FINAL",toString());
+        Editorial.escribirArchivo("revisiones.txt", toString()); //se guardan los datos en el archivo
+        //Se notifica al autor los resultados de su artículo
+        enviarCorreo(revision.getArticulo().getAutor().getCorreoElectronico(),"RESUTADOR FINAL",toString());
         System.out.println("Volviendo al menú...");
         break;
       default:
@@ -81,10 +94,17 @@ public class Editor extends Usuario{
     }
   }
 
+  /**
+  * Muestra las tareas a realizar por el editor.
+  * 
+  * @param sc Un objeto Scanner para leer la entrada del usuario.
+  */
   public void mostarTareaRealizar(Scanner sc){
     System.out.println("Tarea a realizar de: " + getNombre() + " " + getApellido());
     System.out.println("Registro de decisión final del artículo");
     System.out.println("Articulos revisados: ");
+
+    //Muestra los artículos revisados, con su código
     for (int i = 0; i < Editorial.revisiones.size(); i++) {
         Revision revisionActual = Editorial.revisiones.get(i);
         boolean estaRepetido = false;
@@ -105,19 +125,18 @@ public class Editor extends Usuario{
     System.out.print("Ingrese el codigo del artículo: ");
     String codigoIngresado = sc.nextLine();
     decidirSobreArticulo(codigoIngresado,sc);
-    Editorial.escribirArchivo("revisiones.txt", toString()); //Verificar esto
-    //notificar al autor sobre la decision final del articulo
   }
   
   @Override
-  public String toString(){ //DEBE MOSTAR EL NOMBRE DEL ARTICULO, LA  DECISION FINAL, COMENTARIOS DE LOS REVISORES Y ENVIAR CORREO
+  public String toString(){ 
+    // Debe mostrar el nombre del artículo, la decisión final, comentarios de los revisores y enviar correo
     return "Nombre del artículo: " + revision.getArticulo().getTitulo() +
     ", Editor: " + getNombre() + " " + getApellido() +
      ", Decisión final: " + estadoArticulo +
       ", Comentarios de los revisores: " + revision.getComentarios();
   }
 
- 
+  // Métodos getters y setters
   public String getNombreJournal(){
     return nombreJournal;
   }

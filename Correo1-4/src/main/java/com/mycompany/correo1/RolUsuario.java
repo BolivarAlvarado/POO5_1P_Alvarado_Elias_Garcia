@@ -1,9 +1,9 @@
 package com.mycompany.correo1;
 
 /**
- *
- * @author edgar
+ * Enum que define los diferentes roles que un usuario puede tener
+ * dentro del sistema editorial.
  */
 public enum RolUsuario {
-    AUTOR,REVISOR,EDITOR
+    REVISOR,EDITOR
 }
